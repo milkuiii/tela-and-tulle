@@ -1,0 +1,191 @@
+.calendarContainer {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Override react-calendar defaults for a premium look */
+.calendarContainer :global(.react-calendar) {
+  width: 100%;
+  background: none;
+  border: none;
+  font-family: inherit;
+}
+
+.calendarContainer :global(.react-calendar__navigation) {
+  margin-bottom: 1rem;
+}
+
+.calendarContainer :global(.react-calendar__navigation button) {
+  color: var(--color-accent-1);
+  min-width: 44px;
+  background: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.calendarContainer :global(.react-calendar__navigation button:enabled:hover) {
+  background-color: rgba(151, 24, 62, 0.1);
+}
+
+.calendarContainer :global(.react-calendar__month-view__weekdays) {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--color-accent-2);
+  margin-bottom: 0.5rem;
+  abbr {
+    text-decoration: none;
+  }
+}
+
+.calendarContainer :global(.react-calendar__tile) {
+  padding: 1em 0.5em;
+  background: none;
+  text-align: center;
+  position: relative;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  border-radius: 12px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendarContainer :global(.react-calendar__tile:enabled:hover) {
+  background-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+.calendarContainer :global(.react-calendar__tile--active) {
+  background: var(--color-accent-1) !important;
+  color: white !important;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(151, 24, 62, 0.3);
+}
+
+/* Custom occupied tile indicator */
+.occupiedTile {
+  /* You can add specific background here if desired */
+}
+
+.tileIndicator {
+  position: static;
+  margin-top: 6px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--color-accent-2);
+  background: rgba(160, 137, 0, 0.1);
+  padding: 2px 6px;
+  border-radius: 10px;
+  line-height: 1;
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: -1rem; /* pull up to align with calendar navigation */
+  position: relative;
+  z-index: 10;
+}
+
+.todayButton {
+  background: var(--color-accent-2);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+}
+
+.todayButton:hover {
+  background: var(--color-accent-1);
+  transform: translateY(-1px);
+}
+
+/* Custom Tooltip */
+.tooltip {
+  position: absolute;
+  z-index: 100;
+  padding: 16px;
+  min-width: 200px;
+  pointer-events: none; /* so it doesn't interfere with hovering */
+  opacity: 0;
+  animation: fadeIn 0.2s forwards;
+  /* Glass panel styles applied via global class */
+}
+
+.tooltip h4 {
+  color: var(--color-accent-1);
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 4px;
+}
+
+.tooltip ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tooltip li {
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  color: var(--color-text-dark);
+}
+
+.tooltip li::before {
+  content: '•';
+  color: var(--color-accent-2);
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px) translateX(-50%); }
+  to { opacity: 1; transform: translateY(-15px) translateX(-50%); }
+}
+
+@media (max-width: 600px) {
+  .calendarContainer {
+    padding: 12px;
+  }
+  .calendarContainer :global(.react-calendar__tile) {
+    font-size: 0.8rem;
+    padding: 0.5em 0.2em;
+  }
+  .tileIndicator {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    bottom: 4px;
+    border-radius: 6px;
+  }
+  .indicatorText {
+    display: none;
+  }
+  .tooltip {
+    min-width: 160px;
+    padding: 12px;
+  }
+  .tooltip h4 {
+    font-size: 0.8rem;
+  }
+  .tooltip li {
+    font-size: 0.75rem;
+  }
+}
