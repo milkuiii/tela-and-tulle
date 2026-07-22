@@ -1,54 +1,33 @@
-@font-face {
-  font-family: 'Alte Haas Grotesk';
-  src: url('/fonts/AlteHaasGroteskRegular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Alte Haas Grotesk';
-  src: url('/fonts/AlteHaasGroteskBold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --color-main: #f5f7cf;
-  --color-accent-1: #97183e;
-  --color-accent-2: #a08900;
-  
-  --color-text-dark: #2c2c2c;
-  --color-text-light: #f5f7cf;
-  --color-border: rgba(160, 137, 0, 0.2);
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+  --background: #f5f7cf;
+  --foreground: #FAF8F5;
 }
 
 body {
-  font-family: 'Alte Haas Grotesk', 'Outfit', sans-serif;
-  background-color: var(--color-main);
-  color: var(--color-text-dark);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 500;
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-/* Glassmorphism utility */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px 0 rgba(151, 24, 62, 0.05);
+::-webkit-scrollbar-track {
+  background: #f5f7cf;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2E2A32;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7A1C3E;
 }

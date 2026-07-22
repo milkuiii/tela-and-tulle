@@ -1,0 +1,311 @@
+"use client";
+
+import React from "react";
+import { FilterOptions } from "@/types/database";
+import { Filter, RotateCcw, Search, SlidersHorizontal } from "lucide-react";
+
+interface FilterSidebarProps {
+  filters: FilterOptions;
+  setFilters: React.Dispatch<React.SetStateAction<FilterOptions>>;
+  allTags: string[];
+  allColors: string[];
+  allSizes: string[];
+}
+
+export function FilterSidebar({
+  filters,
+  setFilters,
+  allTags,
+  allColors,
+  allSizes,
+}: FilterSidebarProps) {
+  const handleReset = () => {
+    setFilters({
+      searchQuery: "",
+      tags: [],
+      color: "",
+      size: "",
+      bustMin: undefined,
+      bustMax: undefined,
+      waistMin: undefined,
+      waistMax: undefined,
+      hipMin: undefined,
+      hipMax: undefined,
+      lengthMin: undefined,
+      lengthMax: undefined,
+      startDate: undefined,
+      endDate: undefined,
+    });
+  };
+
+  const toggleTag = (tag: string) => {
+    setFilters((prev) => {
+      const exists = prev.tags.includes(tag);
+      return {
+        ...prev,
+        tags: exists ? prev.tags.filter((t) => t !== tag) : [...prev.tags, tag],
+      };
+    });
+  };
+
+  return (
+    <aside className="bg-[#1C191E] border border-[#2E2A32] rounded-2xl p-5 text-white space-y-6 shadow-xl">
+      <div className="flex items-center justify-between pb-4 border-b border-[#2E2A32]">
+        <div className="flex items-center gap-2 font-sans text-lg font-semibold text-rose-200">
+          <Filter className="w-4 h-4 text-rose-400" />
+          <span>Refine Catalog</span>
+        </div>
+        <button
+          onClick={handleReset}
+          className="text-xs text-neutral-400 hover:text-rose-300 flex items-center gap-1 transition"
+        >
+          <RotateCcw className="w-3 h-3" />
+          <span>Reset</span>
+        </button>
+      </div>
+
+      {/* Search Input */}
+      <div>
+        <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">
+          Search Keyword
+        </label>
+        <div className="relative">
+          <Search className="w-4 h-4 absolute left-3 top-3 text-neutral-500" />
+          <input
+            type="text"
+            placeholder="Search by dress name, style..."
+            value={filters.searchQuery}
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, searchQuery: e.target.value }))
+            }
+            className="w-full bg-[#121013] border border-[#2E2A32] rounded-xl pl-9 pr-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500 placeholder-neutral-600 transition"
+          />
+        </div>
+      </div>
+
+      {/* General Sizing Filter */}
+      <div>
+        <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">
+          Size
+        </label>
+        <div className="flex flex-wrap gap-2">
+          {["", ...allSizes].map((sz) => (
+            <button
+              key={sz || "all-size"}
+              onClick={() => setFilters((prev) => ({ ...prev, size: sz }))}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition border ${
+                filters.size === sz
+                  ? "bg-rose-900/80 border-rose-500 text-white shadow-sm"
+                  : "bg-[#121013] border-[#2E2A32] text-neutral-400 hover:text-white"
+              }`}
+            >
+              {sz || "All Sizes"}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Color Filter */}
+      <div>
+        <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">
+          Color Palette
+        </label>
+        <select
+          value={filters.color}
+          onChange={(e) =>
+            setFilters((prev) => ({ ...prev, color: e.target.value }))
+          }
+          className="w-full bg-[#121013] border border-[#2E2A32] rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-rose-500 cursor-pointer"
+        >
+          <option value="">All Colors</option>
+          {allColors.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Physical Measurements Filter */}
+      <div className="space-y-4 pt-2 border-t border-[#2E2A32]/60">
+        <div className="flex items-center gap-1.5 text-xs font-semibold text-rose-300 uppercase tracking-wider">
+          <SlidersHorizontal className="w-3.5 h-3.5" />
+          <span>Precise Fit (Inches)</span>
+        </div>
+
+        {/* Bust */}
+        <div>
+          <div className="flex justify-between text-xs text-neutral-400 mb-1">
+            <span>Bust Range</span>
+            <span>
+              {filters.bustMin || 30}" - {filters.bustMax || 45}"
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <input
+              type="number"
+              placeholder="Min"
+              value={filters.bustMin ?? ""}
+              onChange={(e) =>
+                setFilters((p) => ({
+                  ...p,
+                  bustMin: e.target.value ? Number(e.target.value) : undefined,
+                }))
+              }
+              className="bg-[#121013] border border-[#2E2A32] rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-neutral-600 focus:border-rose-500"
+            />
+            <input
+              type="number"
+              placeholder="Max"
+              value={filters.bustMax ?? ""}
+              onChange={(e) =>
+                setFilters((p) => ({
+                  ...p,
+                  bustMax: e.target.value ? Number(e.target.value) : undefined,
+                }))
+              }
+              className="bg-[#121013] border border-[#2E2A32] rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-neutral-600 focus:border-rose-500"
+            />
+          </div>
+        </div>
+
+        {/* Waist */}
+        <div>
+          <div className="flex justify-between text-xs text-neutral-400 mb-1">
+            <span>Waist Range</span>
+            <span>
+              {filters.waistMin || 22}" - {filters.waistMax || 38}"
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <input
+              type="number"
+              placeholder="Min"
+              value={filters.waistMin ?? ""}
+              onChange={(e) =>
+                setFilters((p) => ({
+                  ...p,
+                  waistMin: e.target.value ? Number(e.target.value) : undefined,
+                }))
+              }
+              className="bg-[#121013] border border-[#2E2A32] rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-neutral-600 focus:border-rose-500"
+            />
+            <input
+              type="number"
+              placeholder="Max"
+              value={filters.waistMax ?? ""}
+              onChange={(e) =>
+                setFilters((p) => ({
+                  ...p,
+                  waistMax: e.target.value ? Number(e.target.value) : undefined,
+                }))
+              }
+              className="bg-[#121013] border border-[#2E2A32] rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-neutral-600 focus:border-rose-500"
+            />
+          </div>
+        </div>
+
+        {/* Hips */}
+        <div>
+          <div className="flex justify-between text-xs text-neutral-400 mb-1">
+            <span>Hips Range</span>
+            <span>
+              {filters.hipMin || 32}" - {filters.hipMax || 48}"
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <input
+              type="number"
+              placeholder="Min"
+              value={filters.hipMin ?? ""}
+              onChange={(e) =>
+                setFilters((p) => ({
+                  ...p,
+                  hipMin: e.target.value ? Number(e.target.value) : undefined,
+                }))
+              }
+              className="bg-[#121013] border border-[#2E2A32] rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-neutral-600 focus:border-rose-500"
+            />
+            <input
+              type="number"
+              placeholder="Max"
+              value={filters.hipMax ?? ""}
+              onChange={(e) =>
+                setFilters((p) => ({
+                  ...p,
+                  hipMax: e.target.value ? Number(e.target.value) : undefined,
+                }))
+              }
+              className="bg-[#121013] border border-[#2E2A32] rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-neutral-600 focus:border-rose-500"
+            />
+          </div>
+        </div>
+
+        {/* Length */}
+        <div>
+          <div className="flex justify-between text-xs text-neutral-400 mb-1">
+            <span>Dress Length</span>
+            <span>
+              {filters.lengthMin || 50}" - {filters.lengthMax || 65}"
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <input
+              type="number"
+              placeholder="Min"
+              value={filters.lengthMin ?? ""}
+              onChange={(e) =>
+                setFilters((p) => ({
+                  ...p,
+                  lengthMin: e.target.value
+                    ? Number(e.target.value)
+                    : undefined,
+                }))
+              }
+              className="bg-[#121013] border border-[#2E2A32] rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-neutral-600 focus:border-rose-500"
+            />
+            <input
+              type="number"
+              placeholder="Max"
+              value={filters.lengthMax ?? ""}
+              onChange={(e) =>
+                setFilters((p) => ({
+                  ...p,
+                  lengthMax: e.target.value
+                    ? Number(e.target.value)
+                    : undefined,
+                }))
+              }
+              className="bg-[#121013] border border-[#2E2A32] rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-neutral-600 focus:border-rose-500"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Style Tags Filter */}
+      <div className="pt-2 border-t border-[#2E2A32]/60">
+        <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">
+          Style Tags
+        </label>
+        <div className="flex flex-wrap gap-1.5">
+          {allTags.map((tag) => {
+            const isSelected = filters.tags.includes(tag);
+            return (
+              <button
+                key={tag}
+                onClick={() => toggleTag(tag)}
+                className={`px-2.5 py-1 rounded-full text-xs transition border ${
+                  isSelected
+                    ? "bg-rose-900 text-rose-200 border-rose-500 font-semibold"
+                    : "bg-[#121013] text-neutral-400 border-[#2E2A32] hover:text-neutral-200"
+                }`}
+              >
+                #{tag}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </aside>
+  );
+}
