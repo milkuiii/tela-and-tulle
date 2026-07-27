@@ -29,24 +29,32 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-[#FFEEEE] text-[#2D1A22] font-sans antialiased min-h-screen flex flex-col selection:bg-[#FFB5BD] selection:text-[#2D1A22]">
+      <body className="text-[#2D1A22] font-sans antialiased min-h-screen selection:bg-[#FFB5BD] selection:text-[#2D1A22] p-3 sm:p-6 lg:p-10 flex justify-center items-start">
         <AppProvider>
-          <div className="flex justify-center w-full p-[10px] overflow-hidden border-transparent">
-            <Navbar />
-          </div>
-          <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-            {children}
-          </main>
-          <footer className="border-t border-[#FFB5BD]/40 bg-[#FFEEEE]/80 backdrop-blur-md py-8 text-[#2D1A22]/50 text-xs text-center">
-            <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <span className="font-display tracking-widest text-[#B32F4E] font-semibold text-sm">
-                TELA & TULLE © 2026
-              </span>
-              <span>
-                Built with Next.js, TypeScript, Tailwind CSS, & Supabase
-              </span>
+          {/* Main Floating Glassmorphic Container */}
+          <div className="w-full max-w-6xl mx-auto outer-glass-container flex flex-col overflow-hidden">
+            {/* Header / Navbar Section */}
+            <div className="flex justify-center w-full p-4 sm:p-6 overflow-hidden border-transparent">
+              <Navbar />
             </div>
-          </footer>
+
+            {/* Main Page Content */}
+            <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+              {children}
+            </main>
+
+            {/* Footer Section */}
+            <footer className="border-t border-[#FFB5BD]/30 bg-[#FFEEEE]/40 backdrop-blur-md py-8 text-[#2D1A22]/50 text-xs text-center">
+              <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <span className="font-display tracking-widest text-[#B32F4E] font-semibold text-sm">
+                  TELA & TULLE © 2026
+                </span>
+                <span>
+                  Built with Next.js, TypeScript, Tailwind CSS, & Supabase
+                </span>
+              </div>
+            </footer>
+          </div>
         </AppProvider>
       </body>
     </html>

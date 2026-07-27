@@ -49,6 +49,11 @@ html {
 
 body {
   background-color: var(--background);
+  background-image: url('../background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--foreground);
   overflow-x: hidden;
   font-family: 'Alte Haas Grotesk', Helvetica, Arial, system-ui, sans-serif;
@@ -63,7 +68,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #FFEEEE;
+  background: transparent;
   border-radius: 99px;
 }
 
@@ -88,6 +93,15 @@ body {
    Utility: Glass Panel
 ============================================= */
 @layer utilities {
+  .outer-glass-container {
+    background: rgba(255, 238, 238, 0.35);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 24px 64px 0 rgba(45, 26, 34, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+    border-radius: 2.5rem;
+  }
+
   .glass-panel {
     background: rgba(255, 238, 238, 0.65);
     backdrop-filter: blur(12px);

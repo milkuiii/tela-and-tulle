@@ -30,7 +30,7 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-5 rounded-full z-50 w-7xl bg-[#FFEEEE]/80 backdrop-blur-md border border-white/50 shadow-glass overflow-hidden">
+    <header className="sticky top-5 rounded-full z-50 w-full bg-[#FFEEEE]/80 backdrop-blur-md border border-white/50 shadow-glass overflow-hidden">
       {/* Top Demo Bar */}
       <div className="bg-[#F4F7CD]/80 border-b border-[#FFB5BD]/40 px-4 py-2 text-xs flex flex-wrap items-center justify-between gap-3 text-[#2D1A22]/70">
         <div className="flex items-center gap-2">
