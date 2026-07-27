@@ -11,6 +11,33 @@ module.exports = {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        // --- New Design Tokens ---
+        wine: {
+          DEFAULT: '#B32F4E',
+          dark: '#8D2040',
+          deeper: '#6B1830',
+          light: '#D94E6B',
+        },
+        sage: {
+          DEFAULT: '#8D9A2E',
+          dark: '#6D7A1E',
+          light: '#A8B83A',
+        },
+        softPink: {
+          DEFAULT: '#FFEEEE',
+          dark: '#FFD6DA',
+          deeper: '#FFBFC7',
+        },
+        paleMatcha: {
+          DEFAULT: '#F4F7CD',
+          dark: '#E8EDAA',
+        },
+        softRose: {
+          DEFAULT: '#FFB5BD',
+          dark: '#FF8E99',
+          light: '#FFCDD2',
+        },
+        // --- Legacy Tokens (preserved for status badges) ---
         rose: {
           50: '#FDF6F7',
           100: '#FCEBEF',
@@ -42,10 +69,22 @@ module.exports = {
           border: '#2E2A32',
           lightBg: '#FAF8F5',
           lightCard: '#FFFFFF',
-        }
+        },
       },
       fontFamily: {
-        sans: ['Helvetica', 'system-ui', 'sans-serif'],
+        // Headings: Alegreya SC (Google Fonts) — elegant high-fashion serif
+        display: ['"Alegreya SC"', 'Georgia', 'serif'],
+        // Body / UI: Helvetica / Alte Haas Grotesk sans-serif stack
+        sans: ['"Alte Haas Grotesk"', 'Helvetica', 'Arial', 'system-ui', 'sans-serif'],
+      },
+      backdropBlur: {
+        xs: '2px',
+      },
+      boxShadow: {
+        'rose-glow': '0 0 30px 0 rgba(255, 181, 189, 0.4)',
+        'wine-glow': '0 0 20px 0 rgba(179, 47, 78, 0.25)',
+        'soft': '0 4px 32px 0 rgba(179, 47, 78, 0.06)',
+        'glass': '0 8px 32px 0 rgba(179, 47, 78, 0.08)',
       },
     },
   },

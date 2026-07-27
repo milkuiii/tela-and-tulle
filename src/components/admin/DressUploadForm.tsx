@@ -88,15 +88,15 @@ export function DressUploadForm() {
   return (
     <div className="space-y-8">
       {/* Upload Form */}
-      <div className="bg-[#1C191E] border border-[#2E2A32] rounded-2xl p-6 shadow-xl text-white space-y-6">
-        <div className="flex items-center gap-2 font-sans text-lg font-bold text-rose-200 pb-3 border-b border-[#2E2A32]">
-          <PlusCircle className="w-5 h-5 text-rose-400" />
+      <div className="bg-[#FFEEEE]/70 backdrop-blur-md border border-white/50 rounded-2xl p-6 shadow-glass text-[#2D1A22] space-y-6">
+        <div className="flex items-center gap-2 font-display text-lg font-bold text-[#B32F4E] pb-3 border-b border-[#FFB5BD]/40">
+          <PlusCircle className="w-5 h-5 text-[#B32F4E]" />
           <span>Add New Gown to Inventory</span>
         </div>
 
         {successMsg && (
-          <div className="bg-emerald-950/80 border border-emerald-700 text-emerald-300 p-3 rounded-xl text-xs flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <div className="bg-[#8D9A2E]/10 border border-[#8D9A2E]/40 text-[#6D7A1E] p-3 rounded-xl text-xs flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-[#8D9A2E]" />
             <span>
               Dress added to inventory! It is now live in the active catalog.
             </span>
@@ -107,7 +107,7 @@ export function DressUploadForm() {
           {/* Section 1: Basic Info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
-              <label className="block text-neutral-300 mb-1 font-semibold">
+              <label className="block text-[#2D1A22]/60 mb-1 font-semibold">
                 Dress Name *
               </label>
               <input
@@ -115,19 +115,19 @@ export function DressUploadForm() {
                 placeholder="e.g. Velvet Solstice Gown"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full bg-[#121013] border border-[#2E2A32] rounded-xl p-2.5 text-white focus:outline-none focus:border-rose-500"
+                className="w-full glass-input rounded-xl p-2.5 text-[#2D1A22]"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-neutral-300 mb-1 font-semibold">
+              <label className="block text-[#2D1A22]/60 mb-1 font-semibold">
                 Ownership Type
               </label>
               <select
                 value={ownerId}
                 onChange={(e) => setOwnerId(e.target.value)}
-                className="w-full bg-[#121013] border border-[#2E2A32] rounded-xl p-2.5 text-white focus:outline-none focus:border-rose-500 cursor-pointer"
+                className="w-full glass-input rounded-xl p-2.5 text-[#2D1A22] cursor-pointer"
               >
                 <option value="">Store-Owned Item (In-House)</option>
                 {consignors.map((c) => (
@@ -139,7 +139,7 @@ export function DressUploadForm() {
             </div>
 
             <div>
-              <label className="block text-neutral-300 mb-1 font-semibold">
+              <label className="block text-[#2D1A22]/60 mb-1 font-semibold">
                 Color Palette
               </label>
               <input
@@ -147,13 +147,13 @@ export function DressUploadForm() {
                 placeholder="e.g. Emerald Green, Midnight Blue"
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
-                className="w-full bg-[#121013] border border-[#2E2A32] rounded-xl p-2.5 text-white focus:outline-none focus:border-rose-500"
+                className="w-full glass-input rounded-xl p-2.5 text-[#2D1A22]"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-neutral-300 mb-1 font-semibold">
+            <label className="block text-[#2D1A22]/60 mb-1 font-semibold">
               Description
             </label>
             <textarea
@@ -161,25 +161,25 @@ export function DressUploadForm() {
               placeholder="Describe silhouette, fabric grade, lining, back detail..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full bg-[#121013] border border-[#2E2A32] rounded-xl p-2.5 text-white focus:outline-none focus:border-rose-500"
+              className="w-full glass-input rounded-xl p-2.5 text-[#2D1A22]"
             />
           </div>
 
           {/* Section 2: Measurements & Size */}
-          <div className="bg-[#121013] border border-[#2E2A32] p-4 rounded-xl space-y-3">
-            <h4 className="font-semibold text-rose-300 uppercase tracking-wider flex items-center gap-1.5">
+          <div className="bg-[#F4F7CD]/60 backdrop-blur-sm border border-[#FFB5BD]/30 p-4 rounded-xl space-y-3">
+            <h4 className="font-display font-semibold text-[#B32F4E] uppercase tracking-wider flex items-center gap-1.5">
               <SlidersHorizontal className="w-3.5 h-3.5" /> Size & Physical
               Measurements
             </h4>
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
               <div>
-                <label className="block text-neutral-400 mb-1">
+                <label className="block text-[#2D1A22]/50 mb-1">
                   Standard Size
                 </label>
                 <select
                   value={size}
                   onChange={(e) => setSize(e.target.value)}
-                  className="w-full bg-[#1C191E] border border-[#2E2A32] rounded-lg p-2 text-white"
+                  className="w-full glass-input rounded-lg p-2 text-[#2D1A22]"
                 >
                   <option value="XS">XS</option>
                   <option value="S">S</option>
@@ -189,7 +189,7 @@ export function DressUploadForm() {
                 </select>
               </div>
               <div>
-                <label className="block text-neutral-400 mb-1">
+                <label className="block text-[#2D1A22]/50 mb-1">
                   Bust (Inches)
                 </label>
                 <input
@@ -197,11 +197,11 @@ export function DressUploadForm() {
                   step="0.5"
                   value={bust}
                   onChange={(e) => setBust(Number(e.target.value))}
-                  className="w-full bg-[#1C191E] border border-[#2E2A32] rounded-lg p-2 text-white"
+                  className="w-full glass-input rounded-lg p-2 text-[#2D1A22]"
                 />
               </div>
               <div>
-                <label className="block text-neutral-400 mb-1">
+                <label className="block text-[#2D1A22]/50 mb-1">
                   Waist (Inches)
                 </label>
                 <input
@@ -209,11 +209,11 @@ export function DressUploadForm() {
                   step="0.5"
                   value={waist}
                   onChange={(e) => setWaist(Number(e.target.value))}
-                  className="w-full bg-[#1C191E] border border-[#2E2A32] rounded-lg p-2 text-white"
+                  className="w-full glass-input rounded-lg p-2 text-[#2D1A22]"
                 />
               </div>
               <div>
-                <label className="block text-neutral-400 mb-1">
+                <label className="block text-[#2D1A22]/50 mb-1">
                   Hips (Inches)
                 </label>
                 <input
@@ -221,11 +221,11 @@ export function DressUploadForm() {
                   step="0.5"
                   value={hip}
                   onChange={(e) => setHip(Number(e.target.value))}
-                  className="w-full bg-[#1C191E] border border-[#2E2A32] rounded-lg p-2 text-white"
+                  className="w-full glass-input rounded-lg p-2 text-[#2D1A22]"
                 />
               </div>
               <div>
-                <label className="block text-neutral-400 mb-1">
+                <label className="block text-[#2D1A22]/50 mb-1">
                   Length (Inches)
                 </label>
                 <input
@@ -233,60 +233,60 @@ export function DressUploadForm() {
                   step="0.5"
                   value={lengthInches}
                   onChange={(e) => setLengthInches(Number(e.target.value))}
-                  className="w-full bg-[#1C191E] border border-[#2E2A32] rounded-lg p-2 text-white"
+                  className="w-full glass-input rounded-lg p-2 text-[#2D1A22]"
                 />
               </div>
             </div>
           </div>
 
           {/* Section 3: Financial Parameters */}
-          <div className="bg-[#121013] border border-[#2E2A32] p-4 rounded-xl space-y-3">
-            <h4 className="font-semibold text-rose-300 uppercase tracking-wider">
+          <div className="bg-[#F4F7CD]/60 backdrop-blur-sm border border-[#FFB5BD]/30 p-4 rounded-xl space-y-3">
+            <h4 className="font-display font-semibold text-[#B32F4E] uppercase tracking-wider">
               Financial Pricing Structure
             </h4>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div>
-                <label className="block text-neutral-400 mb-1">
+                <label className="block text-[#2D1A22]/50 mb-1">
                   Retail Value (₱)
                 </label>
                 <input
                   type="number"
                   value={retailPrice}
                   onChange={(e) => setRetailPrice(Number(e.target.value))}
-                  className="w-full bg-[#1C191E] border border-[#2E2A32] rounded-lg p-2 text-white"
+                  className="w-full glass-input rounded-lg p-2 text-[#2D1A22]"
                 />
               </div>
               <div>
-                <label className="block text-neutral-400 mb-1">
+                <label className="block text-[#2D1A22]/50 mb-1">
                   Base 2-Day Rate (₱)
                 </label>
                 <input
                   type="number"
                   value={baseRentalPrice}
                   onChange={(e) => setBaseRentalPrice(Number(e.target.value))}
-                  className="w-full bg-[#1C191E] border border-[#2E2A32] rounded-lg p-2 text-white"
+                  className="w-full glass-input rounded-lg p-2 text-[#2D1A22]"
                 />
               </div>
               <div>
-                <label className="block text-neutral-400 mb-1">
+                <label className="block text-[#2D1A22]/50 mb-1">
                   Extra Daily Extension (₱)
                 </label>
                 <input
                   type="number"
                   value={extensionRate}
                   onChange={(e) => setExtensionRate(Number(e.target.value))}
-                  className="w-full bg-[#1C191E] border border-[#2E2A32] rounded-lg p-2 text-white"
+                  className="w-full glass-input rounded-lg p-2 text-[#2D1A22]"
                 />
               </div>
               <div>
-                <label className="block text-neutral-400 mb-1">
+                <label className="block text-[#2D1A22]/50 mb-1">
                   Security Deposit (₱)
                 </label>
                 <input
                   type="number"
                   value={securityDeposit}
                   onChange={(e) => setSecurityDeposit(Number(e.target.value))}
-                  className="w-full bg-[#1C191E] border border-[#2E2A32] rounded-lg p-2 text-white"
+                  className="w-full glass-input rounded-lg p-2 text-[#2D1A22]"
                 />
               </div>
             </div>
@@ -295,7 +295,7 @@ export function DressUploadForm() {
           {/* Section 4: Image URLs & Tags */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-neutral-300 mb-1 font-semibold">
+              <label className="block text-[#2D1A22]/60 mb-1 font-semibold">
                 Image URLs (One per line)
               </label>
               <textarea
@@ -303,11 +303,11 @@ export function DressUploadForm() {
                 value={imageUrlInput}
                 onChange={(e) => setImageUrlInput(e.target.value)}
                 placeholder="https://..."
-                className="w-full bg-[#121013] border border-[#2E2A32] rounded-xl p-2.5 text-white font-mono text-[11px] focus:outline-none focus:border-rose-500"
+                className="w-full glass-input rounded-xl p-2.5 text-[#2D1A22] font-mono text-[11px]"
               />
             </div>
             <div>
-              <label className="block text-neutral-300 mb-1 font-semibold">
+              <label className="block text-[#2D1A22]/60 mb-1 font-semibold">
                 Style Tags (Comma Separated)
               </label>
               <input
@@ -315,14 +315,14 @@ export function DressUploadForm() {
                 value={tagsInput}
                 onChange={(e) => setTagsInput(e.target.value)}
                 placeholder="Gala, Black-Tie, Velvet"
-                className="w-full bg-[#121013] border border-[#2E2A32] rounded-xl p-2.5 text-white focus:outline-none focus:border-rose-500"
+                className="w-full glass-input rounded-xl p-2.5 text-[#2D1A22]"
               />
             </div>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-rose-900 hover:bg-rose-800 text-white font-bold py-3.5 rounded-xl transition shadow-lg text-sm"
+            className="w-full bg-[#B32F4E] hover:bg-[#8D2040] text-white font-bold py-3.5 rounded-xl transition shadow-wine-glow text-sm"
           >
             Publish Gown to Inventory
           </button>
@@ -330,21 +330,21 @@ export function DressUploadForm() {
       </div>
 
       {/* Inventory Items Management Table & Archival Protection Controls */}
-      <div className="bg-[#1C191E] border border-[#2E2A32] rounded-2xl p-6 shadow-xl text-white space-y-4">
-        <div className="flex items-center justify-between pb-3 border-b border-[#2E2A32]">
-          <h3 className="font-sans text-lg font-bold text-rose-200">
+      <div className="bg-[#FFEEEE]/70 backdrop-blur-md border border-white/50 rounded-2xl p-6 shadow-glass text-[#2D1A22] space-y-4">
+        <div className="flex items-center justify-between pb-3 border-b border-[#FFB5BD]/40">
+          <h3 className="font-display text-lg font-bold text-[#B32F4E]">
             Current Inventory & Archival Protection Controls ({inventory.length}
             )
           </h3>
-          <span className="text-xs text-neutral-400">
+          <span className="text-xs text-[#2D1A22]/40">
             Archived items are excluded from public search but retained for
             historical records.
           </span>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-neutral-300">
-            <thead className="bg-[#121013] border-b border-[#2E2A32] uppercase text-[10px] text-rose-300">
+          <table className="w-full text-left text-xs text-[#2D1A22]/70">
+            <thead className="bg-[#F4F7CD]/80 border-b border-[#FFB5BD]/40 uppercase text-[10px] text-[#B32F4E] font-semibold tracking-wider">
               <tr>
                 <th className="py-3 px-4">Item Name</th>
                 <th className="py-3 px-4">Owner</th>
@@ -354,22 +354,22 @@ export function DressUploadForm() {
                 <th className="py-3 px-4 text-right">Archival Toggle</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#2E2A32]">
+            <tbody className="divide-y divide-[#FFB5BD]/30">
               {inventory.map((item) => (
-                <tr key={item.id} className="hover:bg-[#252129] transition">
-                  <td className="py-3 px-4 font-semibold text-white">
+                <tr key={item.id} className="hover:bg-[#FFB5BD]/10 transition">
+                  <td className="py-3 px-4 font-semibold text-[#2D1A22]">
                     {item.name}
-                    <span className="block text-[10px] text-neutral-500">
+                    <span className="block text-[10px] text-[#2D1A22]/40">
                       {item.color}
                     </span>
                   </td>
                   <td className="py-3 px-4">
                     {item.owner ? (
-                      <span className="text-purple-300 font-medium">
+                      <span className="text-[#8D9A2E] font-medium">
                         {item.owner.full_name}
                       </span>
                     ) : (
-                      <span className="text-neutral-500 font-mono">
+                      <span className="text-[#2D1A22]/30 font-mono">
                         Store-Owned
                       </span>
                     )}
@@ -385,11 +385,11 @@ export function DressUploadForm() {
                   </td>
                   <td className="py-3 px-4">
                     {item.status === "active" ? (
-                      <span className="bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded text-[10px] font-semibold">
+                      <span className="bg-[#8D9A2E]/10 text-[#6D7A1E] border border-[#8D9A2E]/35 px-2 py-0.5 rounded text-[10px] font-semibold">
                         Active (Public)
                       </span>
                     ) : (
-                      <span className="bg-neutral-800 text-neutral-400 border border-neutral-700 px-2 py-0.5 rounded text-[10px] font-semibold">
+                      <span className="bg-white/60 text-[#2D1A22]/40 border border-[#FFB5BD]/40 px-2 py-0.5 rounded text-[10px] font-semibold">
                         Archived (Hidden)
                       </span>
                     )}
@@ -400,14 +400,14 @@ export function DressUploadForm() {
                         onClick={() =>
                           updateInventoryStatus(item.id, "archived")
                         }
-                        className="bg-amber-950/80 hover:bg-amber-900 text-amber-200 border border-amber-700 px-2.5 py-1 rounded text-[10px] font-semibold transition"
+                        className="bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-300/60 px-2.5 py-1 rounded text-[10px] font-semibold transition"
                       >
                         Archive Item
                       </button>
                     ) : (
                       <button
                         onClick={() => updateInventoryStatus(item.id, "active")}
-                        className="bg-emerald-950 hover:bg-emerald-900 text-emerald-200 border border-emerald-700 px-2.5 py-1 rounded text-[10px] font-semibold transition"
+                        className="bg-[#8D9A2E]/10 hover:bg-[#8D9A2E]/20 text-[#6D7A1E] border border-[#8D9A2E]/35 px-2.5 py-1 rounded text-[10px] font-semibold transition"
                       >
                         Restore Active
                       </button>

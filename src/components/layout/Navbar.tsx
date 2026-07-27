@@ -30,17 +30,17 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-5 rounded-full z-50 bg-[#97183e] backdrop-blur-md w-7xl text-white">
+    <header className="sticky top-5 rounded-full z-50 w-7xl bg-[#FFEEEE]/80 backdrop-blur-md border border-white/50 shadow-glass overflow-hidden">
       {/* Top Demo Bar */}
-      <div className="bg-[#1C191E] border-b border-[#2E2A32]/60 px-4 py-2 text-xs flex flex-wrap items-center justify-between gap-3 text-neutral-300">
+      <div className="bg-[#F4F7CD]/80 border-b border-[#FFB5BD]/40 px-4 py-2 text-xs flex flex-wrap items-center justify-between gap-3 text-[#2D1A22]/70">
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-rose-950/80 text-rose-300 border border-rose-800/50">
-            <Sparkles className="w-3 h-3 mr-1 text-rose-400" /> DEMO ROLE
+          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-[#B32F4E]/10 text-[#B32F4E] border border-[#B32F4E]/25">
+            <Sparkles className="w-3 h-3 mr-1 text-[#B32F4E]" /> DEMO ROLE
             SWITCHER
           </span>
-          <span className="hidden sm:inline text-neutral-400">
+          <span className="hidden sm:inline text-[#2D1A22]/50">
             Active Mode:{" "}
-            <strong className="text-white font-medium">
+            <strong className="text-[#2D1A22] font-semibold">
               {currentUser
                 ? `${currentUser.full_name} (${currentUser.role.toUpperCase()})`
                 : "Public Guest Customer"}
@@ -51,7 +51,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <label
             htmlFor="role-select"
-            className="text-neutral-400 text-xs hidden md:inline"
+            className="text-[#2D1A22]/50 text-xs hidden md:inline"
           >
             Switch Role:
           </label>
@@ -59,7 +59,7 @@ export function Navbar() {
             id="role-select"
             value={currentUser ? currentUser.id : "guest"}
             onChange={handleRoleChange}
-            className="bg-[#2E2A32] text-white text-xs px-2.5 py-1 rounded border border-neutral-700 focus:outline-none focus:border-rose-500 cursor-pointer"
+            className="bg-white/70 text-[#2D1A22] text-xs px-2.5 py-1 rounded border border-[#FFB5BD]/60 focus:outline-none focus:border-[#B32F4E] cursor-pointer transition"
           >
             <option value="guest">Public Guest Customer</option>
             {users.map((u) => (
@@ -77,10 +77,10 @@ export function Navbar() {
                 "8:00 PM Automation Cron Triggered! Any active rentals past end_date have been updated to status: LATE.",
               );
             }}
-            className="flex items-center gap-1.5 bg-[#2E2A32] hover:bg-neutral-800 text-amber-300 border border-amber-800/40 px-2.5 py-1 rounded text-xs transition"
+            className="flex items-center gap-1.5 bg-[#F4F7CD] hover:bg-[#E8EDAA] text-[#8D9A2E] border border-[#8D9A2E]/30 px-2.5 py-1 rounded text-xs transition shadow-sm"
             title="Simulates the 8:00 PM daily automation trigger that updates 'out' rentals past end_date to 'late'"
           >
-            <Clock className="w-3.5 h-3.5 text-amber-400" />
+            <Clock className="w-3.5 h-3.5 text-[#8D9A2E]" />
             <span>Run 8 PM Cron</span>
           </button>
         </div>
@@ -90,10 +90,10 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand */}
         <Link href="/" className="flex flex-col group">
-          <span className="font-sans text-2xl text-[#fdefee] font-bold group-hover:text-rose-300 transition">
+          <span className="font-display text-2xl text-[#B32F4E] font-bold group-hover:text-[#8D2040] transition">
             tela&tulle
           </span>
-          <span className="text-[9px] uppercase tracking-[0.3em] text-[#f5f7cf] font-medium">
+          <span className="text-[9px] uppercase tracking-[0.3em] text-[#8D9A2E] font-medium">
             Keeping style sustainable and accessible.
           </span>
         </Link>
@@ -104,11 +104,11 @@ export function Navbar() {
             href="/"
             className={`px-3 py-2 rounded-lg transition flex items-center gap-1.5 ${
               pathname === "/"
-                ? "bg-rose-950/60 text-rose-300 border border-rose-800/40"
-                : "text-neutral-300 hover:text-white hover:bg-neutral-800/40"
+                ? "bg-[#B32F4E]/10 text-[#B32F4E] border border-[#B32F4E]/25"
+                : "text-[#2D1A22]/60 hover:text-[#B32F4E] hover:bg-[#FFB5BD]/20"
             }`}
           >
-            <Home className="w-4 h-4 text-rose-400" />
+            <Home className="w-4 h-4 text-[#B32F4E]" />
             <span>Home</span>
           </Link>
 
@@ -116,11 +116,11 @@ export function Navbar() {
             href="/"
             className={`px-3 py-2 rounded-lg transition flex items-center gap-1.5 ${
               pathname === "/"
-                ? "bg-rose-950/60 text-rose-300 border border-rose-800/40"
-                : "text-neutral-300 hover:text-white hover:bg-neutral-800/40"
+                ? "bg-[#B32F4E]/10 text-[#B32F4E] border border-[#B32F4E]/25"
+                : "text-[#2D1A22]/60 hover:text-[#B32F4E] hover:bg-[#FFB5BD]/20"
             }`}
           >
-            <ShoppingBag className="w-4 h-4 text-rose-400" />
+            <ShoppingBag className="w-4 h-4 text-[#B32F4E]" />
             <span>Catalog</span>
           </Link>
 
@@ -128,11 +128,11 @@ export function Navbar() {
             href="/"
             className={`px-3 py-2 rounded-lg transition flex items-center gap-1.5 ${
               pathname === "/"
-                ? "bg-rose-950/60 text-rose-300 border border-rose-800/40"
-                : "text-neutral-300 hover:text-white hover:bg-neutral-800/40"
+                ? "bg-[#B32F4E]/10 text-[#B32F4E] border border-[#B32F4E]/25"
+                : "text-[#2D1A22]/60 hover:text-[#B32F4E] hover:bg-[#FFB5BD]/20"
             }`}
           >
-            <ShoppingBag className="w-4 h-4 text-rose-400" />
+            <ShoppingBag className="w-4 h-4 text-[#B32F4E]" />
             <span>Lend With Us</span>
           </Link>
 
@@ -141,13 +141,13 @@ export function Navbar() {
               href="/admin"
               className={`px-3 py-2 rounded-lg transition flex items-center gap-1.5 ${
                 pathname.startsWith("/admin")
-                  ? "bg-rose-950/60 text-rose-300 border border-rose-800/40"
-                  : "text-neutral-300 hover:text-white hover:bg-neutral-800/40"
+                  ? "bg-[#B32F4E]/10 text-[#B32F4E] border border-[#B32F4E]/25"
+                  : "text-[#2D1A22]/60 hover:text-[#B32F4E] hover:bg-[#FFB5BD]/20"
               }`}
             >
-              <Shield className="w-4 h-4 text-amber-400" />
+              <Shield className="w-4 h-4 text-[#8D9A2E]" />
               <span>Admin Portal</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-[#8D9A2E] animate-pulse"></span>
             </Link>
           )}
 
@@ -156,13 +156,13 @@ export function Navbar() {
               href="/consignor"
               className={`px-3 py-2 rounded-lg transition flex items-center gap-1.5 ${
                 pathname.startsWith("/consignor")
-                  ? "bg-rose-950/60 text-rose-300 border border-rose-800/40"
-                  : "text-neutral-300 hover:text-white hover:bg-neutral-800/40"
+                  ? "bg-[#B32F4E]/10 text-[#B32F4E] border border-[#B32F4E]/25"
+                  : "text-[#2D1A22]/60 hover:text-[#B32F4E] hover:bg-[#FFB5BD]/20"
               }`}
             >
-              <UserCheck className="w-4 h-4 text-purple-400" />
+              <UserCheck className="w-4 h-4 text-[#8D9A2E]" />
               <span>Consignor Portal</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-[#8D9A2E] animate-pulse"></span>
             </Link>
           )}
 
@@ -170,11 +170,11 @@ export function Navbar() {
             href="/"
             className={`px-3 py-2 rounded-lg transition flex items-center gap-1.5 ${
               pathname === "/"
-                ? "bg-rose-950/60 text-rose-300 border border-rose-800/40"
-                : "text-neutral-300 hover:text-white hover:bg-neutral-800/40"
+                ? "bg-[#B32F4E]/10 text-[#B32F4E] border border-[#B32F4E]/25"
+                : "text-[#2D1A22]/60 hover:text-[#B32F4E] hover:bg-[#FFB5BD]/20"
             }`}
           >
-            <ShoppingBag className="w-4 h-4 text-rose-400" />
+            <ShoppingBag className="w-4 h-4 text-[#B32F4E]" />
             <span>Profile</span>
           </Link>
         </nav>

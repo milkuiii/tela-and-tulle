@@ -18,10 +18,10 @@ export function DressCard({ dress, onSelect }: DressCardProps) {
   return (
     <div
       onClick={() => onSelect(dress)}
-      className="group relative bg-[#1C191E] border border-[#2E2A32] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:border-rose-800/60 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+      className="group relative bg-[#FFEEEE]/70 backdrop-blur-md border border-white/50 rounded-2xl overflow-hidden shadow-glass hover:shadow-rose-glow hover:border-[#FFB5BD]/70 transition-all duration-300 cursor-pointer flex flex-col justify-between"
     >
       {/* Image Banner */}
-      <div className="relative aspect-[3/4] w-full bg-[#121013] overflow-hidden">
+      <div className="relative aspect-[3/4] w-full bg-[#FFD6DA]/30 overflow-hidden">
         <Image
           src={primaryImage}
           alt={dress.name}
@@ -31,20 +31,20 @@ export function DressCard({ dress, onSelect }: DressCardProps) {
         />
 
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1C191E] via-transparent to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#FFEEEE]/80 via-transparent to-transparent" />
 
         {/* Top Badges */}
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
-          <span className="bg-black/70 backdrop-blur-md text-white text-xs font-semibold px-2.5 py-1 rounded-full border border-white/10 shadow-sm">
+          <span className="bg-white/75 backdrop-blur-md text-[#2D1A22] text-xs font-semibold px-2.5 py-1 rounded-full border border-white/60 shadow-sm">
             Size {dress.size}
           </span>
-          <span className="bg-rose-950/80 backdrop-blur-md text-rose-200 text-xs font-medium px-2.5 py-1 rounded-full border border-rose-800/50">
+          <span className="bg-[#B32F4E]/10 backdrop-blur-md text-[#B32F4E] text-xs font-medium px-2.5 py-1 rounded-full border border-[#B32F4E]/25">
             {dress.color}
           </span>
         </div>
 
         {/* Retail Price Tag */}
-        <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-neutral-300 text-[11px] px-2.5 py-1 rounded-full border border-white/10">
+        <div className="absolute top-3 right-3 bg-white/70 backdrop-blur-md text-[#2D1A22]/70 text-[11px] px-2.5 py-1 rounded-full border border-white/60 shadow-sm">
           Valued ₱{dress.retail_price.toLocaleString()}
         </div>
 
@@ -53,7 +53,7 @@ export function DressCard({ dress, onSelect }: DressCardProps) {
           {dress.tags.slice(0, 3).map((t) => (
             <span
               key={t}
-              className="bg-black/60 text-neutral-300 text-[10px] px-2 py-0.5 rounded backdrop-blur-sm"
+              className="bg-white/60 text-[#2D1A22]/70 text-[10px] px-2 py-0.5 rounded backdrop-blur-sm border border-white/40"
             >
               #{t}
             </span>
@@ -62,32 +62,32 @@ export function DressCard({ dress, onSelect }: DressCardProps) {
       </div>
 
       {/* Card Body */}
-      <div className="p-5 flex-1 flex flex-col justify-between space-y-4 text-white">
+      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
         <div>
-          <h3 className="font-sans text-lg font-bold text-rose-100 group-hover:text-rose-300 transition line-clamp-1">
+          <h3 className="font-display text-lg font-bold text-[#B32F4E] group-hover:text-[#8D2040] transition line-clamp-1">
             {dress.name}
           </h3>
-          <p className="text-neutral-400 text-xs mt-1.5 line-clamp-2 leading-relaxed">
+          <p className="text-[#2D1A22]/60 text-xs mt-1.5 line-clamp-2 leading-relaxed">
             {dress.description}
           </p>
         </div>
 
         {/* Pricing Block */}
-        <div className="pt-3 border-t border-[#2E2A32] flex items-center justify-between">
+        <div className="pt-3 border-t border-[#FFB5BD]/40 flex items-center justify-between">
           <div>
-            <span className="text-[10px] uppercase tracking-wider text-rose-400 font-semibold block">
+            <span className="text-[10px] uppercase tracking-wider text-[#B32F4E] font-semibold block">
               2-Day Rental
             </span>
-            <span className="font-sans text-xl font-bold text-white">
+            <span className="font-sans text-xl font-bold text-[#2D1A22]">
               ₱{dress.base_rental_price}
             </span>
-            <span className="text-neutral-400 text-xs ml-1">
+            <span className="text-[#2D1A22]/50 text-xs ml-1">
               +₱{dress.extension_rate_daily}/extra day
             </span>
           </div>
 
-          <button className="bg-rose-900/80 hover:bg-rose-800 text-rose-100 px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition border border-rose-700/50 shadow-md">
-            <Calendar className="w-3.5 h-3.5 text-rose-300" />
+          <button className="bg-[#B32F4E] hover:bg-[#8D2040] text-white px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition shadow-wine-glow border border-[#B32F4E]/50">
+            <Calendar className="w-3.5 h-3.5" />
             <span>Check Dates</span>
           </button>
         </div>

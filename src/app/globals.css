@@ -2,32 +2,117 @@
 @tailwind components;
 @tailwind utilities;
 
+/* =============================================
+   Alte Haas Grotesk — Body / UI Font
+   Free grotesque from CDN via fontsource
+============================================= */
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+SC:ital,wght@0,400;0,500;0,700;0,800;0,900;1,400;1,500;1,700&display=swap');
+
+/* Alte Haas Grotesk via direct CDN */
+@font-face {
+  font-family: 'Alte Haas Grotesk';
+  src: url('https://cdn.jsdelivr.net/gh/jamieoliverdesign/AlteHaasGroteskTest@main/AlteHaasGrotesk.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/jamieoliverdesign/AlteHaasGroteskTest@main/AlteHaasGrotesk.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =============================================
+   Design System CSS Variables
+============================================= */
 :root {
-  --background: #f5f7cf;
-  --foreground: #FAF8F5;
+  --background: #FFEEEE;
+  --foreground: #2D1A22;
+
+  /* Brand tokens */
+  --color-wine: #B32F4E;
+  --color-wine-dark: #8D2040;
+  --color-sage: #8D9A2E;
+  --color-soft-pink: #FFEEEE;
+  --color-pale-matcha: #F4F7CD;
+  --color-soft-rose: #FFB5BD;
+
+  /* Surface tokens */
+  --surface-card: rgba(255, 238, 238, 0.7);
+  --surface-glass: rgba(255, 255, 255, 0.5);
+  --border-soft: rgba(255, 181, 189, 0.45);
+  --border-white: rgba(255, 255, 255, 0.45);
+}
+
+/* =============================================
+   Base Styles
+============================================= */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
+  font-family: 'Alte Haas Grotesk', Helvetica, Arial, system-ui, sans-serif;
 }
 
-/* Custom Scrollbars */
+/* =============================================
+   Custom Scrollbars — Soft Rose palette
+============================================= */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f5f7cf;
+  background: #FFEEEE;
+  border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2E2A32;
-  border-radius: 4px;
+  background: #FFB5BD;
+  border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #7A1C3E;
+  background: #B32F4E;
+}
+
+/* =============================================
+   Text Selection
+============================================= */
+::selection {
+  background: #FFB5BD;
+  color: #2D1A22;
+}
+
+/* =============================================
+   Utility: Glass Panel
+============================================= */
+@layer utilities {
+  .glass-panel {
+    background: rgba(255, 238, 238, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 8px 32px 0 rgba(179, 47, 78, 0.07);
+  }
+
+  .glass-panel-matcha {
+    background: rgba(244, 247, 205, 0.70);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 8px 32px 0 rgba(141, 154, 46, 0.07);
+  }
+
+  .glass-input {
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(255, 181, 189, 0.55);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .glass-input:focus {
+    border-color: #B32F4E;
+    box-shadow: 0 0 0 3px rgba(179, 47, 78, 0.10);
+    outline: none;
+  }
 }

@@ -105,35 +105,36 @@ export default function CatalogPage() {
   return (
     <div className="space-y-8 pb-16">
       {/* Hero Header Banner */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#1C191E] via-[#2A101C] to-[#1C191E] border border-[#2E2A32] p-8 sm:p-12 text-white shadow-2xl">
-        <div className="absolute -right-10 -bottom-10 w-96 h-96 bg-rose-900/20 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#FFEEEE] via-[#FFD6DA] to-[#F4F7CD] border border-[#FFB5BD]/40 p-8 sm:p-12 shadow-glass">
+        <div className="absolute -right-10 -bottom-10 w-96 h-96 bg-[#FFB5BD]/30 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-20 -top-10 w-72 h-72 bg-[#F4F7CD]/60 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-3xl space-y-4 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-950/80 border border-rose-800/60 text-xs text-rose-300 font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B32F4E]/10 border border-[#B32F4E]/25 text-xs text-[#B32F4E] font-semibold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" /> Haute Couture Dress Rentals
           </div>
 
-          <h1 className="font-sans text-3xl sm:text-5xl font-bold tracking-tight text-rose-100 leading-tight">
+          <h1 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-[#B32F4E] leading-tight">
             Curated Eveningwear & Runway Statement Pieces
           </h1>
 
-          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed font-sans">
+          <p className="text-[#2D1A22]/70 text-sm sm:text-base leading-relaxed font-sans">
             Rent iconic designer gowns for galas, red carpet events, and
             weddings. Seamless dynamic pricing, physical measurement filters,
             and guaranteed availability.
           </p>
 
-          <div className="pt-4 flex flex-wrap items-center gap-6 text-xs text-neutral-400 font-medium">
+          <div className="pt-4 flex flex-wrap items-center gap-6 text-xs text-[#2D1A22]/60 font-medium">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-rose-400" />
+              <ShieldCheck className="w-4 h-4 text-[#B32F4E]" />
               <span>Full Security Protection</span>
             </div>
             <div className="flex items-center gap-2">
-              <HeartHandshake className="w-4 h-4 text-amber-400" />
+              <HeartHandshake className="w-4 h-4 text-[#8D9A2E]" />
               <span>Direct Consignor Payout Ledger</span>
             </div>
             <div className="flex items-center gap-2">
-              <Layers className="w-4 h-4 text-purple-400" />
+              <Layers className="w-4 h-4 text-[#B32F4E]" />
               <span>2-Day Baseline Rental</span>
             </div>
           </div>
@@ -146,13 +147,13 @@ export default function CatalogPage() {
         <div className="lg:hidden col-span-1">
           <button
             onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-            className="w-full bg-[#1C191E] border border-[#2E2A32] text-white py-3 px-4 rounded-xl flex items-center justify-between text-sm font-semibold"
+            className="w-full bg-[#FFEEEE]/80 backdrop-blur-md border border-[#FFB5BD]/50 text-[#2D1A22] py-3 px-4 rounded-xl flex items-center justify-between text-sm font-semibold shadow-soft hover:shadow-rose-glow transition"
           >
             <span className="flex items-center gap-2">
-              <SlidersHorizontal className="w-4 h-4 text-rose-400" /> Filter
+              <SlidersHorizontal className="w-4 h-4 text-[#B32F4E]" /> Filter
               Catalog ({publicInventory.length} items)
             </span>
-            <span className="text-xs text-rose-300">
+            <span className="text-xs text-[#B32F4E]">
               {mobileFilterOpen ? "Close" : "Expand"}
             </span>
           </button>
@@ -183,10 +184,10 @@ export default function CatalogPage() {
 
         {/* Dress Cards Grid */}
         <div className="col-span-1 lg:col-span-3 space-y-6">
-          <div className="flex items-center justify-between border-b border-[#2E2A32] pb-4">
-            <div className="text-xs text-neutral-400">
+          <div className="flex items-center justify-between border-b border-[#FFB5BD]/40 pb-4">
+            <div className="text-xs text-[#2D1A22]/50">
               Showing{" "}
-              <strong className="text-white font-semibold">
+              <strong className="text-[#2D1A22] font-semibold">
                 {publicInventory.length}
               </strong>{" "}
               available gown{publicInventory.length === 1 ? "" : "s"}
@@ -194,9 +195,9 @@ export default function CatalogPage() {
           </div>
 
           {publicInventory.length === 0 ? (
-            <div className="bg-[#1C191E] border border-[#2E2A32] rounded-3xl p-12 text-center text-neutral-400 space-y-4">
-              <PackageSearch className="w-12 h-12 text-neutral-600 mx-auto" />
-              <h3 className="font-sans text-xl font-bold text-white">
+            <div className="bg-[#FFEEEE]/70 backdrop-blur-md border border-white/50 rounded-3xl p-12 text-center text-[#2D1A22]/50 space-y-4 shadow-glass">
+              <PackageSearch className="w-12 h-12 text-[#FFB5BD] mx-auto" />
+              <h3 className="font-display text-xl font-bold text-[#B32F4E]">
                 No Dresses Match Your Filters
               </h3>
               <p className="text-xs max-w-md mx-auto">
@@ -220,7 +221,7 @@ export default function CatalogPage() {
                     lengthMax: undefined,
                   })
                 }
-                className="bg-rose-900 hover:bg-rose-800 text-white text-xs px-4 py-2 rounded-xl transition"
+                className="bg-[#B32F4E] hover:bg-[#8D2040] text-white text-xs px-5 py-2.5 rounded-xl transition shadow-wine-glow"
               >
                 Clear All Filters
               </button>
