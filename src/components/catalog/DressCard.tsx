@@ -33,19 +33,22 @@ export function DressCard({ dress, onSelect }: DressCardProps) {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#FFEEEE]/80 via-transparent to-transparent" />
 
-        {/* Top Badges */}
-        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
-          <span className="bg-white/75 backdrop-blur-md text-[#2D1A22] text-xs font-semibold px-2.5 py-1 rounded-full border border-white/60 shadow-sm">
-            Size {dress.size}
-          </span>
-          <span className="bg-[#B32F4E]/10 backdrop-blur-md text-[#B32F4E] text-xs font-medium px-2.5 py-1 rounded-full border border-[#B32F4E]/25">
-            {dress.color}
-          </span>
-        </div>
+        {/* Top Badges — left: size + color, right: valued price, no overlap */}
+        <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2 z-10">
+          {/* Left: Size + Color */}
+          <div className="flex flex-wrap gap-1 min-w-0">
+            <span className="shrink-0 bg-white/75 backdrop-blur-md text-[#2D1A22] text-xs font-semibold px-2.5 py-1 rounded-full border border-white/60 shadow-sm whitespace-nowrap">
+              Size {dress.size}
+            </span>
+            <span className="min-w-0 bg-[#B32F4E]/10 backdrop-blur-md text-[#B32F4E] text-xs font-medium px-2.5 py-1 rounded-full border border-[#B32F4E]/25 truncate max-w-[120px]">
+              {dress.color}
+            </span>
+          </div>
 
-        {/* Retail Price Tag */}
-        <div className="absolute top-3 right-3 bg-white/70 backdrop-blur-md text-[#2D1A22]/70 text-[11px] px-2.5 py-1 rounded-full border border-white/60 shadow-sm">
-          Valued ₱{dress.retail_price.toLocaleString()}
+          {/* Right: Retail Price */}
+          <span className="shrink-0 bg-white/70 backdrop-blur-md text-[#2D1A22]/70 text-[11px] px-2.5 py-1 rounded-full border border-white/60 shadow-sm whitespace-nowrap">
+            Valued ₱{dress.retail_price.toLocaleString()}
+          </span>
         </div>
 
         {/* Quick Tags overlay */}
@@ -62,32 +65,32 @@ export function DressCard({ dress, onSelect }: DressCardProps) {
       </div>
 
       {/* Card Body */}
-      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+      <div className="p-3 sm:p-5 flex-1 flex flex-col justify-between space-y-3 sm:space-y-4">
         <div>
-          <h3 className="font-display text-lg font-bold text-[#B32F4E] group-hover:text-[#8D2040] transition line-clamp-1">
+          <h3 className="font-display text-sm sm:text-lg font-bold text-[#B32F4E] group-hover:text-[#8D2040] transition line-clamp-1">
             {dress.name}
           </h3>
-          <p className="text-[#2D1A22]/60 text-xs mt-1.5 line-clamp-2 leading-relaxed">
+          <p className="text-[#2D1A22]/60 text-[10px] sm:text-xs mt-1 sm:mt-1.5 line-clamp-2 leading-relaxed hidden sm:block">
             {dress.description}
           </p>
         </div>
 
         {/* Pricing Block */}
-        <div className="pt-3 border-t border-[#FFB5BD]/40 flex items-center justify-between">
+        <div className="pt-2 sm:pt-3 border-t border-[#FFB5BD]/40 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div>
-            <span className="text-[10px] uppercase tracking-wider text-[#B32F4E] font-semibold block">
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#B32F4E] font-semibold block">
               2-Day Rental
             </span>
-            <span className="font-sans text-xl font-bold text-[#2D1A22]">
+            <span className="font-sans text-base sm:text-xl font-bold text-[#2D1A22]">
               ₱{dress.base_rental_price}
             </span>
-            <span className="text-[#2D1A22]/50 text-xs ml-1">
+            <span className="text-[#2D1A22]/50 text-[9px] sm:text-xs ml-0.5 hidden sm:inline">
               +₱{dress.extension_rate_daily}/extra day
             </span>
           </div>
 
-          <button className="bg-[#B32F4E] hover:bg-[#8D2040] text-white px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition shadow-wine-glow border border-[#B32F4E]/50">
-            <Calendar className="w-3.5 h-3.5" />
+          <button className="bg-[#B32F4E] hover:bg-[#8D2040] text-white px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold flex items-center justify-center gap-1 sm:gap-1.5 transition shadow-wine-glow border border-[#B32F4E]/50 w-full sm:w-auto">
+            <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             <span>Check Dates</span>
           </button>
         </div>

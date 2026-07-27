@@ -29,17 +29,17 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="text-[#2D1A22] font-sans antialiased min-h-screen selection:bg-[#FFB5BD] selection:text-[#2D1A22] p-3 sm:p-6 lg:p-10 flex justify-center items-start">
+      <body className="text-[#2D1A22] font-sans antialiased min-h-screen selection:bg-[#FFB5BD] selection:text-[#2D1A22] p-1.5 sm:p-4 lg:p-10 flex justify-center items-start">
         <AppProvider>
           {/* Main Floating Glassmorphic Container */}
-          <div className="w-full max-w-6xl mx-auto outer-glass-container flex flex-col overflow-hidden">
+          <div className="w-full mx-auto outer-glass-container flex flex-col overflow-hidden">
             {/* Header / Navbar Section */}
-            <div className="flex justify-center w-full p-4 sm:p-6 overflow-hidden border-transparent">
+            <div className="flex justify-center w-full p-2 sm:p-4 lg:p-6 overflow-hidden border-transparent">
               <Navbar />
             </div>
 
             {/* Main Page Content */}
-            <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+            <main className="flex-1 w-full px-3 sm:px-6 lg:px-8 py-3 sm:py-6">
               {children}
             </main>
 
