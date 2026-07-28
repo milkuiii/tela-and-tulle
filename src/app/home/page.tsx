@@ -87,20 +87,19 @@ export default function HomePage() {
   return (
     <div className="space-y-16 pb-20">
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#2D1A22] via-[#4A1E2D] to-[#1A1012] border border-white/10 p-10 sm:p-16 shadow-glass min-h-[480px] flex items-center">
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#E0AEBA] via-[#D17484] to-[#8B263E] border border-white/10 p-10 sm:p-16 shadow-glass min-h-[480px] flex items-center">
         {/* Decorative blobs */}
         <div className="absolute -right-16 -top-16 w-[500px] h-[500px] bg-[#B32F4E]/15 rounded-full blur-[80px] pointer-events-none" />
         <div className="absolute -left-16 -bottom-16 w-[400px] h-[400px] bg-[#8D9A2E]/10 rounded-full blur-[80px] pointer-events-none" />
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMwLTkuOTQtOC4wNi0xOC0xOC0xOFYwaDQydjQySDM2VjE4eiIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuMDIiLz48L2c+PC9zdmc+')] opacity-30 pointer-events-none" />
-
         <div className="relative z-10 max-w-3xl space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#B32F4E]/20 border border-[#B32F4E]/30 text-xs text-[#FFB5BD] font-semibold uppercase tracking-widest">
-            <Sparkles className="w-3.5 h-3.5" /> Haute Couture Dress Rentals
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#8B263E]/80 border border-[#B32F4E]/30 text-xs text-[#FFB5BD] font-semibold uppercase tracking-widest">
+            <Sparkles className="w-3.5 h-3.5" /> Sustainable, Accessible, and Affordable Style
           </div>
 
           <h1 className="font-display text-4xl sm:text-6xl font-bold text-white leading-tight">
             Wear the Dream.{" "}
-            <span className="text-[#FFB5BD]">Not the Price Tag.</span>
+            <span className="text-[#f4f7cd]">Not the Price Tag.</span>
           </h1>
 
           <p className="text-white/60 text-base sm:text-lg leading-relaxed font-sans max-w-2xl">
@@ -129,13 +128,13 @@ export default function HomePage() {
           {/* Stats row */}
           <div className="flex flex-wrap gap-8 pt-4 border-t border-white/10">
             {[
-              { num: `${inventory.filter((i) => i.status === "active").length}+`, label: "Active Gowns" },
+              { num: `${inventory.filter((i) => i.status === "active").length}+`, label: "Available Pieces" },
               { num: "50%", label: "Consignor Commission" },
               { num: "2-Day", label: "Base Rental Rate" },
             ].map(({ num, label }) => (
               <div key={label} className="space-y-0.5">
-                <div className="text-2xl font-display font-bold text-[#FFB5BD]">{num}</div>
-                <div className="text-xs text-white/40 uppercase tracking-wider">{label}</div>
+                <div className="text-2xl font-display font-bold text-white/70">{num}</div>
+                <div className="text-xs text-white/60 uppercase tracking-wider">{label}</div>
               </div>
             ))}
           </div>
@@ -238,9 +237,9 @@ export default function HomePage() {
       {/* ── How It Works ── */}
       <section className="space-y-8">
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8D9A2E]/10 border border-[#8D9A2E]/25 text-xs text-[#8D9A2E] font-semibold uppercase tracking-widest">
+          {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8D9A2E]/10 border border-[#8D9A2E]/25 text-xs text-[#8D9A2E] font-semibold uppercase tracking-widest">
             <Gem className="w-3.5 h-3.5" /> Simple Process
-          </div>
+          </div> */}
           <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#B32F4E]">
             How Tela & Tulle Works
           </h2>

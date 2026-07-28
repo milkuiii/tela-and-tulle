@@ -185,9 +185,9 @@ export default function CatalogPage() {
         {/* Dress Cards Grid */}
         <div className="col-span-1 lg:col-span-3 space-y-6">
           <div className="flex items-center justify-between border-b border-[#FFB5BD]/40 pb-4">
-            <div className="text-xs text-[#2D1A22]/50">
+            <div className="text-xs text-white/70">
               Showing{" "}
-              <strong className="text-[#2D1A22] font-semibold">
+              <strong className="text-white font-semibold">
                 {publicInventory.length}
               </strong>{" "}
               available gown{publicInventory.length === 1 ? "" : "s"}

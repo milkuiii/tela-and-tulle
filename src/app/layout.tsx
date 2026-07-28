@@ -47,10 +47,7 @@ export default function RootLayout({
             <footer className="border-t border-[#FFB5BD]/30 bg-[#FFEEEE]/40 backdrop-blur-md py-8 text-[#2D1A22]/50 text-xs text-center">
               <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <span className="font-display tracking-widest text-[#B32F4E] font-semibold text-sm">
-                  TELA & TULLE © 2026
-                </span>
-                <span>
-                  Built with Next.js, TypeScript, Tailwind CSS, & Supabase
+                  tela&tulle © 2026
                 </span>
               </div>
             </footer>

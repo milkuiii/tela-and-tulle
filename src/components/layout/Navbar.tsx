@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+import LogoImage from "@/public/logo-dark.png";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAppStore } from "@/lib/store";
@@ -34,13 +36,14 @@ export function Navbar() {
   const navLinks = [
     { href: "/home", label: "Home", icon: Home },
     { href: "/catalog", label: "Catalog", icon: ShoppingBag },
+    { href: "/fitting", label: "Fitting", icon: Crown},
     { href: "/lend-with-us", label: "Lend With Us", icon: HeartHandshake },
     { href: "/profile", label: "Profile", icon: User },
   ];
 
   return (
     <header className="sticky top-5 rounded-full z-50 w-full bg-[#FFEEEE]/80 backdrop-blur-md border border-white/50 shadow-glass overflow-hidden">
-      {/* Top Demo Bar */}
+      {/* Top Demo Bar
       <div className="bg-[#F4F7CD]/80 border-b border-[#FFB5BD]/40 px-3 py-2 text-xs flex items-center justify-between gap-2 text-[#2D1A22]/70 overflow-x-auto">
         <div className="flex items-center gap-2 shrink-0">
           <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-[#B32F4E]/10 text-[#B32F4E] border border-[#B32F4E]/25 whitespace-nowrap">
@@ -85,15 +88,16 @@ export function Navbar() {
             <span className="hidden sm:inline">8 PM Cron</span>
           </button>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Header Nav */}
       <div className="px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
         {/* Brand */}
         <Link href="/home" className="flex flex-col group shrink-0">
-          <span className="font-display text-xl sm:text-2xl text-[#B32F4E] font-bold group-hover:text-[#8D2040] transition">
+          {/* <span className="font-display text-xl sm:text-2xl text-[#B32F4E] font-bold group-hover:text-[#8D2040] transition">
             tela&tulle
-          </span>
+          </span> */}
+          <Image src={LogoImage} alt="Tela & Tulle Logo" className="w-auto h-12 aspect-auto" />
           <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#8D9A2E] font-medium hidden xs:block">
             Keeping style sustainable and accessible.
           </span>

@@ -40,7 +40,7 @@ export function DressCard({ dress, onSelect }: DressCardProps) {
             <span className="shrink-0 bg-white/75 backdrop-blur-md text-[#2D1A22] text-xs font-semibold px-2.5 py-1 rounded-full border border-white/60 shadow-sm whitespace-nowrap">
               Size {dress.size}
             </span>
-            <span className="min-w-0 bg-[#B32F4E]/10 backdrop-blur-md text-[#B32F4E] text-xs font-medium px-2.5 py-1 rounded-full border border-[#B32F4E]/25 truncate max-w-[120px]">
+            <span className="min-w-0 bg-white/75 backdrop-blur-md text-[#B32F4E] text-xs font-medium px-2.5 py-1 rounded-full border border-[#B32F4E]/25 truncate max-w-[120px]">
               {dress.color}
             </span>
           </div>
