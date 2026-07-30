@@ -8,7 +8,7 @@ export function GlobalSettingsPanel() {
   const { globalSettings, updateGlobalCommissionRate } = useAppStore();
 
   const [rateInput, setRateInput] = useState<number>(
-    globalSettings.global_commission_rate * 100,
+    (globalSettings?.global_commission_rate ?? 0.50) * 100,
   );
   const [successMsg, setSuccessMsg] = useState(false);
 
@@ -63,11 +63,11 @@ export function GlobalSettingsPanel() {
           </div>
           <span className="text-[10px] text-[#2D1A22]/40 mt-1 block">
             Current Rate Decimal:{" "}
-            <strong>{globalSettings.global_commission_rate}</strong> (Consignor
+            <strong>{globalSettings?.global_commission_rate ?? 0.50}</strong> (Consignor
             gets{" "}
-            {((1 - globalSettings.global_commission_rate) * 100).toFixed(0)}% /
+            {((1 - (globalSettings?.global_commission_rate ?? 0.50)) * 100).toFixed(0)}% /
             Platform gets{" "}
-            {(globalSettings.global_commission_rate * 100).toFixed(0)}%)
+            {((globalSettings?.global_commission_rate ?? 0.50) * 100).toFixed(0)}%)
           </span>
         </div>
 

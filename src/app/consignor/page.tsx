@@ -18,7 +18,7 @@ import {
 import { format, parseISO } from "date-fns";
 
 export default function ConsignorDashboardPage() {
-  const { currentUser, users, setCurrentUser, inventory, rentals, payouts } =
+  const { currentUser, users, inventory, rentals, payouts } =
     useAppStore();
 
   const isConsignor = currentUser?.role === "consignor";
@@ -51,11 +51,7 @@ export default function ConsignorDashboardPage() {
   const consignorUser = currentUser;
   const activeConsignorId = consignorUser.id;
 
-  // Helper to switch demo consignor
-  const selectConsignor = (id: string) => {
-    const target = users.find((u) => u.id === id);
-    if (target) setCurrentUser(target);
-  };
+
 
   // 1. DATA ISOLATION: Filter ONLY items owned by active consignor!
   const ownedInventory = inventory.filter(
@@ -122,26 +118,7 @@ export default function ConsignorDashboardPage() {
             </p>
           </div>
 
-          {/* Consignor Selector dropdown for testing */}
-          <div className="bg-white/60 backdrop-blur-sm border border-[#FFB5BD]/50 p-4 rounded-2xl space-y-2 text-xs text-[#2D1A22]/70">
-            <div className="flex items-center gap-1.5 font-semibold text-[#B32F4E]">
-              <Lock className="w-3.5 h-3.5 text-[#8D9A2E]" /> Active Consignor
-              Identity:
-            </div>
-            <select
-              value={activeConsignorId || ""}
-              onChange={(e) => selectConsignor(e.target.value)}
-              className="glass-input text-[#2D1A22] rounded-xl px-3 py-2 text-xs w-full cursor-pointer"
-            >
-              {users
-                .filter((u) => u.role === "consignor")
-                .map((c) => (
-                  <option key={c.id} value={c.id}>
-                    👗 {c.full_name} ({c.email})
-                  </option>
-                ))}
-            </select>
-          </div>
+
         </div>
       </section>
 

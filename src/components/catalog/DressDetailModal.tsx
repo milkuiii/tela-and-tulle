@@ -61,7 +61,7 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
   // Real-time price calculation
   const priceBreakdown = calculateRentalPrice(dress, startDate, endDate);
 
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
 
@@ -75,7 +75,7 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
       return;
     }
 
-    const res = createCustomerAndRental(
+    const res = await createCustomerAndRental(
       {
         full_name: fullName,
         email,

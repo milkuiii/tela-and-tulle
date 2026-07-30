@@ -7,48 +7,33 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAppStore } from "@/lib/store";
 import {
-  Sparkles,
   Shield,
   UserCheck,
   Clock,
-  Crown,
   ShoppingBag,
   Home,
   HeartHandshake,
   User,
+  LogOut,
 } from "lucide-react";
 
 export function Navbar() {
   const pathname = usePathname();
-  const { currentUser, setCurrentUser, users, triggerLateCheckCron } =
-    useAppStore();
-
-  const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const val = e.target.value;
-    if (val === "guest") {
-      setCurrentUser(null);
-    } else {
-      const found = users.find((u) => u.id === val);
-      if (found) setCurrentUser(found);
-    }
-  };
+  const { currentUser, logout, triggerLateCheckCron } = useAppStore();
 
   const navLinks = [
     { href: "/home", label: "Home", icon: Home },
     { href: "/catalog", label: "Catalog", icon: ShoppingBag },
     { href: "/fitting", label: "Fitting", icon: Crown},
     { href: "/lend-with-us", label: "Lend With Us", icon: HeartHandshake },
-    { href: "/profile", label: "Profile", icon: User },
+    ...(currentUser ? [{ href: "/profile", label: "Profile", icon: User }] : []),
   ];
 
   return (
     <header className="sticky top-5 rounded-full z-50 w-full bg-[#FFEEEE]/80 backdrop-blur-md border border-white/50 shadow-glass overflow-hidden">
-      {/* Top Demo Bar
+      {/* Top Utility Bar */}
       <div className="bg-[#F4F7CD]/80 border-b border-[#FFB5BD]/40 px-3 py-2 text-xs flex items-center justify-between gap-2 text-[#2D1A22]/70 overflow-x-auto">
         <div className="flex items-center gap-2 shrink-0">
-          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-[#B32F4E]/10 text-[#B32F4E] border border-[#B32F4E]/25 whitespace-nowrap">
-            <Sparkles className="w-3 h-3 mr-1 text-[#B32F4E]" /> DEMO
-          </span>
           <span className="hidden md:inline text-[#2D1A22]/50 whitespace-nowrap">
             Active:{" "}
             <strong className="text-[#2D1A22] font-semibold">
@@ -60,23 +45,9 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
-          <select
-            id="role-select"
-            value={currentUser ? currentUser.id : "guest"}
-            onChange={handleRoleChange}
-            className="bg-white/70 text-[#2D1A22] text-xs px-2 py-1 rounded border border-[#FFB5BD]/60 focus:outline-none focus:border-[#B32F4E] cursor-pointer transition max-w-[160px] sm:max-w-none"
-          >
-            <option value="guest">Public Guest</option>
-            {users.map((u) => (
-              <option key={u.id} value={u.id}>
-                {u.role === "admin" ? "👑" : "👗"} {u.full_name}
-              </option>
-            ))}
-          </select>
-
           <button
-            onClick={() => {
-              triggerLateCheckCron();
+            onClick={async () => {
+              await triggerLateCheckCron();
               alert(
                 "8:00 PM Automation Cron Triggered! Any active rentals past end_date have been updated to status: LATE.",
               );
@@ -158,6 +129,26 @@ export function Navbar() {
               <span className="hidden sm:inline">Consignor Portal</span>
               <span className="w-2 h-2 rounded-full bg-[#8D9A2E] animate-pulse"></span>
             </Link>
+          )}
+
+          {!currentUser ? (
+            <Link
+              href="/login"
+              title="Login / Sign Up"
+              className={`px-3 py-2 ml-1 rounded-lg transition flex items-center gap-1.5 font-semibold bg-[#B32F4E] text-white hover:bg-[#8D2040] shadow-sm shadow-[#B32F4E]/20 hover:-translate-y-0.5 active:translate-y-0`}
+            >
+              <User className="w-4 h-4 shrink-0 text-white" />
+              <span className="hidden sm:inline">Login / Sign Up</span>
+            </Link>
+          ) : (
+            <button
+              onClick={() => logout()}
+              title="Logout"
+              className={`px-3 py-2 ml-1 rounded-lg transition flex items-center gap-1.5 font-semibold bg-white border border-[#FFB5BD] text-[#B32F4E] hover:bg-[#FFEEEE] shadow-sm hover:-translate-y-0.5 active:translate-y-0`}
+            >
+              <LogOut className="w-4 h-4 shrink-0 text-[#B32F4E]" />
+              <span className="hidden sm:inline">Logout</span>
+            </button>
           )}
         </nav>
       </div>

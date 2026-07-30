@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import { AppProvider } from "@/lib/store";
+import ".//globals.css";
+import { Providers } from "./providers";
 import { Navbar } from "@/components/layout/Navbar";
 
 export const metadata: Metadata = {
@@ -30,9 +30,9 @@ export default function RootLayout({
         />
       </head>
       <body className="text-[#2D1A22] font-sans antialiased min-h-screen selection:bg-[#FFB5BD] selection:text-[#2D1A22] p-1.5 sm:p-4 lg:p-10 flex justify-center items-start">
-        <AppProvider>
+        <Providers>
           {/* Main Floating Glassmorphic Container */}
-          <div className="w-full mx-auto outer-glass-container flex flex-col overflow-hidden">
+          <div className="w-4/5 mx-auto outer-glass-container flex flex-col overflow-hidden">
             {/* Header / Navbar Section */}
             <div className="flex justify-center w-full p-2 sm:p-4 lg:p-6 overflow-hidden border-transparent">
               <Navbar />
@@ -52,7 +52,7 @@ export default function RootLayout({
               </div>
             </footer>
           </div>
-        </AppProvider>
+        </Providers>
       </body>
     </html>
   );
