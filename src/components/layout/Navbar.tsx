@@ -161,7 +161,7 @@ export function Navbar() {
     <header className="sticky top-5 z-50 w-full">
       <div className="bg-[#FFEEEE]/90 backdrop-blur-md border border-white/50 shadow-glass rounded-full overflow-hidden">
         {/* Top Utility Bar */}
-        <div className="bg-[#F4F7CD]/80 border-b border-[#FFB5BD]/40 px-4 py-2 text-xs flex items-center justify-between gap-2 text-[#2D1A22]/70 overflow-x-auto">
+        {/* <div className="bg-[#F4F7CD]/80 border-b border-[#FFB5BD]/40 px-4 py-2 text-xs flex items-center justify-between gap-2 text-[#2D1A22]/70 overflow-x-auto">
           <div className="flex items-center gap-2 shrink-0">
             <span className="hidden md:inline text-[#2D1A22]/50 whitespace-nowrap">
               Active:{" "}
@@ -191,7 +191,7 @@ export function Navbar() {
               <span className="hidden sm:inline">8 PM Cron</span>
             </button>
           </div>
-        </div>
+        </div> */}
 
         {/* Main Header Nav */}
         <div className="px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">

@@ -280,10 +280,10 @@ export default function LendWithUsPage() {
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F4F7CD]/10 border border-[#F4F7CD]/25 text-xs text-[#F4F7CD] uppercase tracking-widest">
           <Sparkles className="w-3.5 h-3.5" /> Apply Now
         </div>
-        <h2 className="font-display text-2xl sm:text-3xl  text-[#F4F7CD]">
+        <h2 className="font-display text-5xl sm:text-5xl  text-[#F4F7CD]">
           Become a Consignor Partner
         </h2>
-        <p className="text-[#FFFFFF]/50 text-sm max-w-xl mx-auto">
+        <p className="text-[#FFFFFF]/80 text-sm max-w-xl mx-auto">
           Fill in the form and our team will be in touch within 3–5 business
           days.
         </p>
