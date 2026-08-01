@@ -6,6 +6,7 @@ import { FilterOptions, InventoryItem } from "@/types/database";
 import { FilterSidebar } from "@/components/catalog/FilterSidebar";
 import { DressCard } from "@/components/catalog/DressCard";
 import { DressDetailModal } from "@/components/catalog/DressDetailModal";
+import { checkDressAvailability } from "@/lib/pricing";
 import {
   Sparkles,
   SlidersHorizontal,
@@ -16,7 +17,7 @@ import {
 } from "lucide-react";
 
 export default function CatalogPage() {
-  const { inventory } = useAppStore();
+  const { inventory, rentals } = useAppStore();
 
   const [selectedDress, setSelectedDress] = useState<InventoryItem | null>(
     null,
@@ -63,6 +64,18 @@ export default function CatalogPage() {
       // 1. Archival protection requirement: items with status = 'archived' MUST be excluded from public catalog
       if (item.status === "archived") return false;
 
+      // Date Availability check
+      if (filters.startDate && filters.endDate) {
+        const { isAvailable } = checkDressAvailability(
+          item.id,
+          filters.startDate,
+          filters.endDate,
+          rentals,
+          0 // Buffer days can be adjusted if needed
+        );
+        if (!isAvailable) return false;
+      }
+
       // 2. Keyword Search
       if (filters.searchQuery) {
         const query = filters.searchQuery.toLowerCase();
@@ -100,7 +113,7 @@ export default function CatalogPage() {
 
       return true;
     });
-  }, [inventory, filters]);
+  }, [inventory, filters, rentals]);
 
   return (
     <div className="space-y-8 pb-16">
@@ -114,13 +127,13 @@ export default function CatalogPage() {
             <Sparkles className="w-3.5 h-3.5" /> Haute Couture Dress Rentals
           </div>
 
-          <h1 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-[#B32F4E] leading-tight">
-            Curated Eveningwear & Runway Statement Pieces
+          <h1 className="font-display text-3xl sm:text-5xl  tracking-tight text-[#B32F4E] leading-tight">
+            Curated Pieces for Any Occasion
           </h1>
 
           <p className="text-[#2D1A22]/70 text-sm sm:text-base leading-relaxed font-sans">
-            Rent iconic designer gowns for galas, red carpet events, and
-            weddings. Seamless dynamic pricing, physical measurement filters,
+            Rent iconic designer gowns for weddings, galas, photoshoots, or
+            special events. Seamless dynamic pricing, physical measurement filters,
             and guaranteed availability.
           </p>
 
@@ -130,12 +143,12 @@ export default function CatalogPage() {
               <span>Full Security Protection</span>
             </div>
             <div className="flex items-center gap-2">
-              <HeartHandshake className="w-4 h-4 text-[#8D9A2E]" />
-              <span>Direct Consignor Payout Ledger</span>
-            </div>
-            <div className="flex items-center gap-2">
               <Layers className="w-4 h-4 text-[#B32F4E]" />
               <span>2-Day Baseline Rental</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#B32F4E]" />
+              <span>Seamless Browsing Experience</span>
             </div>
           </div>
         </div>
@@ -197,7 +210,7 @@ export default function CatalogPage() {
           {publicInventory.length === 0 ? (
             <div className="bg-[#FFEEEE]/70 backdrop-blur-md border border-white/50 rounded-3xl p-12 text-center text-[#2D1A22]/50 space-y-4 shadow-glass">
               <PackageSearch className="w-12 h-12 text-[#FFB5BD] mx-auto" />
-              <h3 className="font-display text-xl font-bold text-[#B32F4E]">
+              <h3 className="font-display text-xl  text-[#B32F4E]">
                 No Dresses Match Your Filters
               </h3>
               <p className="text-xs max-w-md mx-auto">

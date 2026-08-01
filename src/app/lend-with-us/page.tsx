@@ -29,7 +29,7 @@ const BENEFITS = [
   {
     icon: DollarSign,
     title: "50% Commission on Every Rental",
-    body: "Earn half of every rental fee for your gown — automatically tracked and compiled into monthly payout settlements.",
+    body: "Earn half of every rental fee for your piece — automatically tracked and compiled into monthly payout settlements.",
     color: "#B32F4E",
     bg: "rgba(179, 47, 78, 0.07)",
     border: "rgba(179, 47, 78, 0.2)",
@@ -37,7 +37,7 @@ const BENEFITS = [
   {
     icon: ShieldCheck,
     title: "Security Deposit Protection",
-    body: "Every rental is backed by a customer security deposit, protecting your gown against damage or late returns.",
+    body: "Every rental is backed by a customer security deposit, protecting your piece against damage or late returns.",
     color: "#8D9A2E",
     bg: "rgba(141, 154, 46, 0.07)",
     border: "rgba(141, 154, 46, 0.2)",
@@ -53,7 +53,7 @@ const BENEFITS = [
   {
     icon: Users,
     title: "Reach the Right Audience",
-    body: "Your pieces are presented to curated audiences seeking high-fashion rentals for galas, weddings, and editorial shoots.",
+    body: "Your pieces are presented to curated audiences seeking high quality for galas, weddings, or editorial shoots.",
     color: "#8D9A2E",
     bg: "rgba(141, 154, 46, 0.07)",
     border: "rgba(141, 154, 46, 0.2)",
@@ -69,7 +69,7 @@ const BENEFITS = [
   {
     icon: TrendingUp,
     title: "Sustainable Fashion Impact",
-    body: "Every rental reduces overconsumption. Your pieces circulate meaningfully instead of collecting dust.",
+    body: "Every rental reduces overconsumption. Your pieces circulate meaningfully instead of collecting dust in the closet.",
     color: "#8D9A2E",
     bg: "rgba(141, 154, 46, 0.07)",
     border: "rgba(141, 154, 46, 0.2)",
@@ -141,7 +141,9 @@ export default function LendWithUsPage() {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -161,18 +163,19 @@ export default function LendWithUsPage() {
 
         <div className="relative z-10 max-w-3xl space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#8D9A2E]/20 border border-[#8D9A2E]/30 text-xs text-[#A8B83A] font-semibold uppercase tracking-widest">
-            <HeartHandshake className="w-3.5 h-3.5" /> Consignor Partnership Program
+            <HeartHandshake className="w-3.5 h-3.5" /> Consignor Partnership
+            Program
           </div>
 
-          <h1 className="font-display text-4xl sm:text-6xl font-bold text-white leading-tight">
-            Let Your Gowns{" "}
+          <h1 className="font-display text-4xl sm:text-6xl  text-white leading-tight">
+            Let Your Pieces{" "}
             <span className="text-[#A8B83A]">Work for You.</span>
           </h1>
 
           <p className="text-white/60 text-base sm:text-lg leading-relaxed font-sans max-w-2xl">
-            Partner with Tela & Tulle to earn passive income from your designer
-            wardrobe. Every rental generates real earnings, tracked transparently
-            in your private consignor dashboard.
+            Partner with Tela & Tulle to earn passive income from your wardrobe.
+            Every rental generates real earnings, tracked real-time in your
+            private consignor dashboard.
           </p>
 
           <div className="flex flex-wrap gap-5 pt-2 border-t border-white/10">
@@ -182,8 +185,12 @@ export default function LendWithUsPage() {
               { num: "Monthly", label: "Payout Cadence" },
             ].map(({ num, label }) => (
               <div key={label} className="space-y-0.5">
-                <div className="text-2xl font-display font-bold text-[#A8B83A]">{num}</div>
-                <div className="text-xs text-white/40 uppercase tracking-wider">{label}</div>
+                <div className="text-2xl font-display  text-[#A8B83A]">
+                  {num}
+                </div>
+                <div className="text-xs text-white/40 uppercase tracking-wider">
+                  {label}
+                </div>
               </div>
             ))}
           </div>
@@ -196,11 +203,12 @@ export default function LendWithUsPage() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8D9A2E]/10 border border-[#8D9A2E]/25 text-xs text-[#8D9A2E] font-semibold uppercase tracking-widest">
             <Star className="w-3.5 h-3.5" /> Why Partner With Us
           </div>
-          <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#B32F4E]">
+          <h2 className="font-display text-2xl sm:text-3xl  text-[#F4F7CD]">
             The Consignor Advantage
           </h2>
-          <p className="text-[#2D1A22]/50 text-sm max-w-xl mx-auto">
-            Everything you need to earn from your wardrobe, without lifting a finger.
+          <p className="text-[#FFFFFF]/50 text-sm max-w-xl mx-auto">
+            Everything you need to earn from your wardrobe, without lifting a
+            finger.
           </p>
         </div>
 
@@ -217,10 +225,12 @@ export default function LendWithUsPage() {
                 <Icon className="w-5 h-5" style={{ color }} />
               </div>
               <div>
-                <h3 className="font-display font-bold text-[#2D1A22] text-sm mb-1.5">
+                <h3 className="font-display  text-[#8D2040] text-sm mb-1.5">
                   {title}
                 </h3>
-                <p className="text-xs text-[#2D1A22]/55 leading-relaxed">{body}</p>
+                <p className="text-xs text-[#8D2040]/55 leading-relaxed">
+                  {body}
+                </p>
               </div>
             </div>
           ))}
@@ -230,11 +240,12 @@ export default function LendWithUsPage() {
       {/* ── How It Works ── */}
       <section className="space-y-8">
         <div className="text-center space-y-2">
-          <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#B32F4E]">
+          <h2 className="font-display text-2xl sm:text-3xl  text-[#F4F7CD]">
             From Wardrobe to Earnings
           </h2>
-          <p className="text-[#2D1A22]/50 text-sm max-w-xl mx-auto">
-            Four simple steps to turn idle designer pieces into a passive income stream.
+          <p className="text-[#FFFFFF]/50 text-sm max-w-xl mx-auto">
+            Four simple steps to turn idle designer pieces into a passive income
+            stream.
           </p>
         </div>
 
@@ -247,183 +258,45 @@ export default function LendWithUsPage() {
               )}
 
               <div className="relative z-10 bg-[#FFEEEE]/70 backdrop-blur-md border border-white/50 rounded-2xl p-6 shadow-glass hover:-translate-y-1 transition-all duration-300 space-y-3 h-full">
-                <div className="text-4xl font-display font-black text-[#B32F4E]/10">
+                <div className="text-4xl font-display text-[#8D2040]">
                   {step}
                 </div>
                 <div className="w-8 h-8 rounded-xl bg-[#B32F4E]/10 border border-[#B32F4E]/20 flex items-center justify-center">
                   <CheckCircle2 className="w-4 h-4 text-[#B32F4E]" />
                 </div>
-                <h3 className="font-display font-bold text-[#2D1A22] text-sm">{title}</h3>
-                <p className="text-xs text-[#2D1A22]/55 leading-relaxed">{body}</p>
+                <h3 className="font-display  text-[#8D2040] text-sm">
+                  {title}
+                </h3>
+                <p className="text-xs text-[#8D2040]/55 leading-relaxed">
+                  {body}
+                </p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── Application Form ── */}
-      <section id="apply" className="space-y-6">
-        <div className="text-center space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B32F4E]/10 border border-[#B32F4E]/25 text-xs text-[#B32F4E] font-semibold uppercase tracking-widest">
-            <Sparkles className="w-3.5 h-3.5" /> Apply Now
-          </div>
-          <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#B32F4E]">
-            Become a Consignor Partner
-          </h2>
-          <p className="text-[#2D1A22]/50 text-sm max-w-xl mx-auto">
-            Fill in the form and our team will be in touch within 3–5 business days.
-          </p>
+      <div className="text-center space-y-2">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F4F7CD]/10 border border-[#F4F7CD]/25 text-xs text-[#F4F7CD] uppercase tracking-widest">
+          <Sparkles className="w-3.5 h-3.5" /> Apply Now
         </div>
-
-        {submitted ? (
-          <div className="max-w-2xl mx-auto bg-[#F4F7CD]/70 backdrop-blur-md border border-[#8D9A2E]/25 rounded-3xl p-10 text-center shadow-glass space-y-4">
-            <div className="w-16 h-16 bg-[#8D9A2E]/15 border border-[#8D9A2E]/30 rounded-full flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-8 h-8 text-[#8D9A2E]" />
-            </div>
-            <h3 className="font-display text-2xl font-bold text-[#8D9A2E]">
-              Application Submitted!
-            </h3>
-            <p className="text-sm text-[#2D1A22]/60 max-w-md mx-auto leading-relaxed">
-              Thank you, <strong>{form.name || "Partner"}</strong>. Our admin team will review your application and reach out to <strong>{form.email}</strong> within 3–5 business days.
-            </p>
-            <button
-              onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", instagram: "", address: "", gownCount: "", message: "" }); }}
-              className="text-xs text-[#B32F4E] hover:text-[#8D2040] transition font-semibold"
-            >
-              Submit another application
-            </button>
-          </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="max-w-2xl mx-auto bg-[#FFEEEE]/70 backdrop-blur-md border border-white/50 rounded-3xl p-8 shadow-glass space-y-5"
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#2D1A22]/60 uppercase tracking-wider flex items-center gap-1.5">
-                  <User className="w-3 h-3" /> Full Name *
-                </label>
-                <input
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
-                  placeholder="e.g. Maria Santos"
-                  className="glass-input w-full px-3 py-2.5 text-sm text-[#2D1A22] rounded-xl placeholder:text-[#2D1A22]/30"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#2D1A22]/60 uppercase tracking-wider flex items-center gap-1.5">
-                  <Mail className="w-3 h-3" /> Email Address *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="your@email.com"
-                  className="glass-input w-full px-3 py-2.5 text-sm text-[#2D1A22] rounded-xl placeholder:text-[#2D1A22]/30"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#2D1A22]/60 uppercase tracking-wider flex items-center gap-1.5">
-                  <Phone className="w-3 h-3" /> Phone Number *
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  required
-                  placeholder="+63 9XX XXX XXXX"
-                  className="glass-input w-full px-3 py-2.5 text-sm text-[#2D1A22] rounded-xl placeholder:text-[#2D1A22]/30"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#2D1A22]/60 uppercase tracking-wider flex items-center gap-1.5">
-                  <Instagram className="w-3 h-3" /> Instagram / TikTok
-                </label>
-                <input
-                  name="instagram"
-                  value={form.instagram}
-                  onChange={handleChange}
-                  placeholder="@yourhandle"
-                  className="glass-input w-full px-3 py-2.5 text-sm text-[#2D1A22] rounded-xl placeholder:text-[#2D1A22]/30"
-                />
-              </div>
-
-              <div className="sm:col-span-2 space-y-1.5">
-                <label className="text-xs font-semibold text-[#2D1A22]/60 uppercase tracking-wider flex items-center gap-1.5">
-                  <MapPin className="w-3 h-3" /> Address (for drop-off/payout) *
-                </label>
-                <input
-                  name="address"
-                  value={form.address}
-                  onChange={handleChange}
-                  required
-                  placeholder="Full address for gown drop-off and payout settlements"
-                  className="glass-input w-full px-3 py-2.5 text-sm text-[#2D1A22] rounded-xl placeholder:text-[#2D1A22]/30"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#2D1A22]/60 uppercase tracking-wider flex items-center gap-1.5">
-                  <Package className="w-3 h-3" /> Estimated Gown Count *
-                </label>
-                <select
-                  name="gownCount"
-                  value={form.gownCount}
-                  onChange={handleChange}
-                  required
-                  className="glass-input w-full px-3 py-2.5 text-sm text-[#2D1A22] rounded-xl cursor-pointer"
-                >
-                  <option value="">Select range…</option>
-                  <option value="1-3">1–3 pieces</option>
-                  <option value="4-10">4–10 pieces</option>
-                  <option value="11-25">11–25 pieces</option>
-                  <option value="25+">25+ pieces</option>
-                </select>
-              </div>
-
-              <div className="sm:col-span-2 space-y-1.5">
-                <label className="text-xs font-semibold text-[#2D1A22]/60 uppercase tracking-wider flex items-center gap-1.5">
-                  <Sparkles className="w-3 h-3" /> Tell Us About Your Collection
-                </label>
-                <textarea
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  rows={4}
-                  placeholder="Describe your gowns — designers, styles, occasions they're suited for. Anything you'd like us to know…"
-                  className="glass-input w-full px-3 py-2.5 text-sm text-[#2D1A22] rounded-xl placeholder:text-[#2D1A22]/30 resize-none"
-                />
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full flex items-center justify-center gap-2 bg-[#B32F4E] hover:bg-[#8D2040] text-white py-3.5 rounded-2xl font-semibold text-sm transition-all shadow-wine-glow hover:-translate-y-0.5 active:translate-y-0"
-            >
-              <Send className="w-4 h-4" />
-              Submit Application
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <p className="text-center text-[10px] text-[#2D1A22]/35">
-              By submitting, you agree that our admin team may contact you at the details provided.
-            </p>
-          </form>
-        )}
-      </section>
+        <h2 className="font-display text-2xl sm:text-3xl  text-[#F4F7CD]">
+          Become a Consignor Partner
+        </h2>
+        <p className="text-[#FFFFFF]/50 text-sm max-w-xl mx-auto">
+          Fill in the form and our team will be in touch within 3–5 business
+          days.
+        </p>
+        <br></br>
+        <a className="inline-flex items-center gap-2 bg-white text-[#8D9A2E] hover:bg-[#F4F7CD] px-8 py-3.5 rounded-2xl  text-sm transition-all shadow-lg hover:-translate-y-0.5" href="https://forms.gle/XerNPLngkvTEtZ4v7" style={{ display: 'inline-block', textDecoration: 'none' }}>
+          APPLY NOW
+        </a>
+      </div>
 
       {/* ── FAQ ── */}
       <section className="max-w-2xl mx-auto space-y-6">
         <div className="text-center space-y-2">
-          <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#B32F4E]">
+          <h2 className="font-display text-2xl sm:text-3xl text-[#F4F7CD]">
             Frequently Asked Questions
           </h2>
         </div>
@@ -438,7 +311,7 @@ export default function LendWithUsPage() {
                 className="w-full flex items-center justify-between p-5 text-left group"
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
               >
-                <span className="font-display font-bold text-sm text-[#2D1A22] group-hover:text-[#B32F4E] transition pr-4">
+                <span className="font-display  text-sm text-[#8D2040] group-hover:text-[#B32F4E] transition pr-4">
                   {q}
                 </span>
                 <span className="shrink-0 text-[#B32F4E]">
@@ -452,7 +325,7 @@ export default function LendWithUsPage() {
 
               {openFaq === idx && (
                 <div className="px-5 pb-5">
-                  <div className="border-t border-[#FFB5BD]/30 pt-4 text-xs text-[#2D1A22]/60 leading-relaxed">
+                  <div className="border-t border-[#FFB5BD]/30 pt-4 text-xs text-[#8D2040]/60 leading-relaxed">
                     {a}
                   </div>
                 </div>
@@ -467,7 +340,7 @@ export default function LendWithUsPage() {
         <div className="absolute inset-0 bg-[#1A2210]/30 pointer-events-none rounded-3xl" />
         <div className="relative z-10 space-y-5 max-w-xl mx-auto">
           <HeartHandshake className="w-10 h-10 text-white/60 mx-auto" />
-          <h2 className="font-display text-2xl sm:text-3xl font-bold text-white">
+          <h2 className="font-display text-2xl sm:text-3xl  text-white">
             Your Wardrobe. Your Earnings.
           </h2>
           <p className="text-white/60 text-sm leading-relaxed">
@@ -476,7 +349,7 @@ export default function LendWithUsPage() {
           </p>
           <a
             href="#apply"
-            className="inline-flex items-center gap-2 bg-white text-[#8D9A2E] hover:bg-[#F4F7CD] px-8 py-3.5 rounded-2xl font-bold text-sm transition-all shadow-lg hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 bg-white text-[#8D9A2E] hover:bg-[#F4F7CD] px-8 py-3.5 rounded-2xl  text-sm transition-all shadow-lg hover:-translate-y-0.5"
           >
             <HeartHandshake className="w-4 h-4" />
             Apply Now

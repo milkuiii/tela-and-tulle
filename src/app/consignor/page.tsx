@@ -29,7 +29,7 @@ export default function ConsignorDashboardPage() {
         <div className="w-16 h-16 bg-[#8D9A2E]/10 border border-[#8D9A2E]/30 rounded-full flex items-center justify-center mx-auto text-[#8D9A2E]">
           <ShieldAlert className="w-8 h-8" />
         </div>
-        <h2 className="font-display text-2xl font-bold text-[#B32F4E]">
+        <h2 className="font-display text-2xl  text-[#B32F4E]">
           Consignor Portal Restricted
         </h2>
         <p className="text-xs text-[#2D1A22]/50 leading-relaxed max-w-md mx-auto">
@@ -104,7 +104,7 @@ export default function ConsignorDashboardPage() {
               <UserCheck className="w-3.5 h-3.5" /> Consignor Financial Portal
             </div>
 
-            <h1 className="font-display text-3xl sm:text-4xl font-bold text-[#B32F4E]">
+            <h1 className="font-display text-3xl sm:text-4xl  text-[#B32F4E]">
               Private Consignment Dashboard
             </h1>
 
@@ -130,7 +130,7 @@ export default function ConsignorDashboardPage() {
             <span className="text-xs uppercase tracking-wider text-[#2D1A22]/50 font-semibold block">
               Consigned Gowns
             </span>
-            <span className="font-sans text-3xl font-bold text-[#2D1A22] mt-1 block">
+            <span className="font-sans text-3xl  text-[#2D1A22] mt-1 block">
               {ownedInventory.length}
             </span>
             <span className="text-[10px] text-[#8D9A2E]">
@@ -148,7 +148,7 @@ export default function ConsignorDashboardPage() {
             <span className="text-xs uppercase tracking-wider text-[#2D1A22]/50 font-semibold block">
               Completed Rentals
             </span>
-            <span className="font-sans text-3xl font-bold text-[#2D1A22] mt-1 block">
+            <span className="font-sans text-3xl  text-[#2D1A22] mt-1 block">
               {completedRentalCount}
             </span>
             <span className="text-[10px] text-emerald-600">
@@ -166,7 +166,7 @@ export default function ConsignorDashboardPage() {
             <span className="text-xs uppercase tracking-wider text-[#B32F4E] font-semibold block">
               Compiled Payout Ledger
             </span>
-            <span className="font-sans text-3xl font-bold text-[#2D1A22] mt-1 block">
+            <span className="font-sans text-3xl  text-[#2D1A22] mt-1 block">
               ₱{totalCalculatedLedgerEarnings.toFixed(2)}
             </span>
             <span className="text-[10px] text-[#2D1A22]/40">
@@ -184,7 +184,7 @@ export default function ConsignorDashboardPage() {
             <span className="text-xs uppercase tracking-wider text-[#8D9A2E] font-semibold block">
               Released Payouts
             </span>
-            <span className="font-sans text-3xl font-bold text-[#2D1A22] mt-1 block">
+            <span className="font-sans text-3xl  text-[#2D1A22] mt-1 block">
               ₱{totalPaidOut.toFixed(2)}
             </span>
             <span className="text-[10px] text-[#2D1A22]/40">
@@ -199,7 +199,7 @@ export default function ConsignorDashboardPage() {
 
       {/* Consigned Gowns Catalog Section */}
       <div className="bg-[#FFEEEE]/70 backdrop-blur-md border border-white/50 rounded-2xl p-6 shadow-glass text-[#2D1A22] space-y-4">
-        <h3 className="font-display text-lg font-bold text-[#B32F4E] border-b border-[#FFB5BD]/40 pb-3">
+        <h3 className="font-display text-lg  text-[#B32F4E] border-b border-[#FFB5BD]/40 pb-3">
           Your Consigned Wardrobe Portfolio ({ownedInventory.length})
         </h3>
 
@@ -214,7 +214,7 @@ export default function ConsignorDashboardPage() {
                 key={item.id}
                 className="bg-white/55 backdrop-blur-sm border border-[#FFB5BD]/40 rounded-xl p-4 space-y-2 text-xs hover:shadow-soft transition"
               >
-                <div className="font-display font-bold text-sm text-[#B32F4E]">
+                <div className="font-display  text-sm text-[#B32F4E]">
                   {item.name}
                 </div>
                 <div className="text-[#2D1A22]/50">
@@ -248,7 +248,7 @@ export default function ConsignorDashboardPage() {
       <div className="bg-[#FFEEEE]/70 backdrop-blur-md border border-white/50 rounded-2xl p-6 shadow-glass text-[#2D1A22] space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#FFB5BD]/40 pb-3">
           <div>
-            <h3 className="font-display text-lg font-bold text-[#B32F4E]">
+            <h3 className="font-display text-lg  text-[#B32F4E]">
               Expected & Completed Rental Payout Ledger
             </h3>
             <p className="text-xs text-[#2D1A22]/50">
@@ -314,7 +314,7 @@ export default function ConsignorDashboardPage() {
                           {snapshotPct.toFixed(0)}% Rate
                         </span>
                       </td>
-                      <td className="py-3.5 px-4 font-mono text-sm font-bold text-[#8D9A2E]">
+                      <td className="py-3.5 px-4 font-mono text-sm  text-[#8D9A2E]">
                         ₱{earnings.toFixed(2)}
                       </td>
                       <td className="py-3.5 px-4">
@@ -339,7 +339,7 @@ export default function ConsignorDashboardPage() {
 
       {/* Historical Released Payments Ledger */}
       <div className="bg-[#FFEEEE]/70 backdrop-blur-md border border-white/50 rounded-2xl p-6 shadow-glass text-[#2D1A22] space-y-4">
-        <h3 className="font-display text-lg font-bold text-[#B32F4E] border-b border-[#FFB5BD]/40 pb-3">
+        <h3 className="font-display text-lg  text-[#B32F4E] border-b border-[#FFB5BD]/40 pb-3">
           Historical Monthly Payment Receipts
         </h3>
 
@@ -366,7 +366,7 @@ export default function ConsignorDashboardPage() {
                     <td className="py-3.5 px-4 font-mono font-semibold text-[#2D1A22]">
                       {format(parseISO(p.payout_month), "MMMM yyyy")}
                     </td>
-                    <td className="py-3.5 px-4 font-mono text-sm font-bold text-[#2D1A22]">
+                    <td className="py-3.5 px-4 font-mono text-sm  text-[#2D1A22]">
                       ₱{Number(p.total_due).toFixed(2)}
                     </td>
                     <td className="py-3.5 px-4">

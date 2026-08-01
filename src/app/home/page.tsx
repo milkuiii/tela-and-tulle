@@ -198,12 +198,12 @@ export default function HomePage() {
                     {gown.name}
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-[#2D1A22]/50">
+                    <span className="text-xs text-[#8D2040]/50">
                       {gown.color} · Size {gown.size}
                     </span>
                     <span className="text-xs  text-[#8D9A2E]">
                       ₱{gown.base_rental_price}
-                      <span className="font-normal text-[#2D1A22]/40">/2 days</span>
+                      <span className="font-normal text-[#8D2040]/40">/2 days</span>
                     </span>
                   </div>
                   {gown.tags.length > 0 && (
@@ -261,7 +261,7 @@ export default function HomePage() {
                   style={{ background: color }}
                 />
                 <div
-                  className="text-4xl font-display mb-4 opacity-60 text-[#2D1A22]"
+                  className="text-4xl font-display mb-4 opacity-60 text-[#8D2040]"
                 >
                   {step}
                 </div>
@@ -271,10 +271,10 @@ export default function HomePage() {
                 >
                   <Icon className="w-6 h-6" style={{ color }} />
                 </div>
-                <h3 className="font-display  text-lg text-[#2D1A22] mb-2">
+                <h3 className="font-display  text-lg text-[#8D2040] mb-2">
                   {title}
                 </h3>
-                <p className="text-xs text-[#2D1A22]/55 leading-relaxed font-sans">
+                <p className="text-xs text-[#8D2040]/55 leading-relaxed font-sans">
                   {description}
                 </p>
               </div>
@@ -310,10 +310,10 @@ export default function HomePage() {
                 <Icon className="w-5 h-5" style={{ color }} />
               </div>
               <div className="space-y-1">
-                <h3 className="font-display text-[#2D1A22] text-base">
+                <h3 className="font-display text-[#8D2040] text-base">
                   {title}
                 </h3>
-                <p className="text-xs text-[#2D1A22]/55 leading-relaxed">
+                <p className="text-xs text-[#8D2040]/55 leading-relaxed">
                   {body}
                 </p>
               </div>

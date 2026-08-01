@@ -83,6 +83,34 @@ export function FilterSidebar({
         </div>
       </div>
 
+      {/* Date Availability Filter */}
+      <div className="pt-2 border-t border-[#FFB5BD]/40">
+        <label className="block text-xs uppercase tracking-wider text-[#2D1A22]/50 mb-2 font-medium">
+          Availability Dates
+        </label>
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className="block text-[10px] text-[#2D1A22]/40 mb-1">Start Date</label>
+            <input
+              type="date"
+              value={filters.startDate || ""}
+              onChange={(e) => setFilters((p) => ({ ...p, startDate: e.target.value || undefined }))}
+              className="w-full glass-input rounded-lg px-2.5 py-1.5 text-xs text-[#2D1A22]"
+            />
+          </div>
+          <div>
+            <label className="block text-[10px] text-[#2D1A22]/40 mb-1">End Date</label>
+            <input
+              type="date"
+              value={filters.endDate || ""}
+              onChange={(e) => setFilters((p) => ({ ...p, endDate: e.target.value || undefined }))}
+              min={filters.startDate}
+              className="w-full glass-input rounded-lg px-2.5 py-1.5 text-xs text-[#2D1A22]"
+            />
+          </div>
+        </div>
+      </div>
+
       {/* General Sizing Filter */}
       <div>
         <label className="block text-xs uppercase tracking-wider text-[#2D1A22]/50 mb-2 font-medium">
