@@ -22,7 +22,7 @@ const HOW_IT_WORKS = [
     icon: ShoppingBag,
     title: "Browse the Catalog",
     description:
-      "Explore our curated collection of haute couture gowns. Filter by size, color, measurements, and occasion tags to find your perfect match.",
+      "Explore our curated collection of dresses. Filter by size, color, measurements, and occasion tags to find your perfect match.",
     color: "#B32F4E",
     bg: "rgba(179, 47, 78, 0.07)",
     border: "rgba(179, 47, 78, 0.2)",
@@ -42,7 +42,7 @@ const HOW_IT_WORKS = [
     icon: Gem,
     title: "Wear & Shine",
     description:
-      "Receive the gown, dazzle at your event, and return it stress-free. A refundable security deposit protects both you and our consignors.",
+      "Receive the piece, dazzle at your event, and return it stress-free. A refundable security deposit protects both you and our consignors.",
     color: "#B32F4E",
     bg: "rgba(179, 47, 78, 0.07)",
     border: "rgba(179, 47, 78, 0.2)",
@@ -97,14 +97,14 @@ export default function HomePage() {
             <Sparkles className="w-3.5 h-3.5" /> Sustainable, Accessible, and Affordable Style
           </div>
 
-          <h1 className="font-display text-4xl sm:text-6xl font-bold text-white leading-tight">
-            Wear the Dream.{" "}
-            <span className="text-[#f4f7cd]">Not the Price Tag.</span>
+          <h1 className="font-display text-4xl sm:text-6xl text-white leading-tight">
+            Your dream wardrobe.{" "}
+            <span className="text-[#f4f7cd]"><br />Accessible, sustainable, and always stylish.</span>
           </h1>
 
           <p className="text-white/60 text-base sm:text-lg leading-relaxed font-sans max-w-2xl">
-            Rent iconic designer gowns for galas, red carpet events, weddings,
-            and editorial shoots. Returned, refreshed, and ready to shine again.
+            Rent stunning pieces for galas, birthdays, weddings,
+            and editorial shoots. Always available, always stylish.
           </p>
 
           <div className="flex flex-wrap gap-4 pt-2">
@@ -133,7 +133,7 @@ export default function HomePage() {
               { num: "2-Day", label: "Base Rental Rate" },
             ].map(({ num, label }) => (
               <div key={label} className="space-y-0.5">
-                <div className="text-2xl font-display font-bold text-white/70">{num}</div>
+                <div className="text-2xl font-display  text-white/70">{num}</div>
                 <div className="text-xs text-white/60 uppercase tracking-wider">{label}</div>
               </div>
             ))}
@@ -146,16 +146,16 @@ export default function HomePage() {
         <section className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#B32F4E]">
+              <h2 className="font-display text-2xl sm:text-3xl  text-[#F4F7CD]">
                 Currently Available
               </h2>
-              <p className="text-sm text-[#2D1A22]/50 mt-1">
+              <p className="text-sm text-[#FFFFFF]/50 mt-1">
                 A glimpse of our active collection — {inventory.filter((i) => i.status === "active").length} gowns ready to rent
               </p>
             </div>
             <Link
               href="/catalog"
-              className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-[#B32F4E] hover:text-[#8D2040] transition group"
+              className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-[#F4F7CD] hover:text-[#FFEEEE] transition group"
             >
               View All
               <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -194,14 +194,14 @@ export default function HomePage() {
                 </div>
 
                 <div className="p-4 space-y-1.5">
-                  <div className="font-display font-bold text-sm text-[#B32F4E] truncate">
+                  <div className="font-display  text-sm text-[#B32F4E] truncate">
                     {gown.name}
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-[#2D1A22]/50">
                       {gown.color} · Size {gown.size}
                     </span>
-                    <span className="text-xs font-bold text-[#8D9A2E]">
+                    <span className="text-xs  text-[#8D9A2E]">
                       ₱{gown.base_rental_price}
                       <span className="font-normal text-[#2D1A22]/40">/2 days</span>
                     </span>
@@ -240,12 +240,12 @@ export default function HomePage() {
           {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8D9A2E]/10 border border-[#8D9A2E]/25 text-xs text-[#8D9A2E] font-semibold uppercase tracking-widest">
             <Gem className="w-3.5 h-3.5" /> Simple Process
           </div> */}
-          <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#B32F4E]">
+          <h2 className="font-display text-2xl sm:text-3xl  text-[#F4F7CD]">
             How Tela & Tulle Works
           </h2>
-          <p className="text-[#2D1A22]/50 text-sm max-w-xl mx-auto leading-relaxed">
-            Renting a designer gown should be as glamorous as wearing one. We
-            keep the process seamless from browse to return.
+          <p className="text-[#FFFFFF]/50 text-sm max-w-xl mx-auto leading-relaxed">
+            Renting a piece should be as comfortable as wearing one. We
+            keep the process seamless from selection to return.
           </p>
         </div>
 
@@ -257,12 +257,11 @@ export default function HomePage() {
                 className="relative bg-[#FFEEEE]/70 backdrop-blur-md border border-white/50 rounded-3xl p-6 shadow-glass hover:shadow-rose-glow hover:-translate-y-1 transition-all duration-300 overflow-hidden group"
               >
                 <div
-                  className="absolute -top-6 -right-6 w-24 h-24 rounded-full opacity-20 blur-xl transition-all duration-300 group-hover:opacity-40"
+                  className="absolute -top-6 -right-6 w-24 h-24 rounded-full opacity-20 blur-xl transition-all duration-300 group-hover:opacity-40 "
                   style={{ background: color }}
                 />
                 <div
-                  className="text-4xl font-display font-black mb-4 opacity-15"
-                  style={{ color }}
+                  className="text-4xl font-display mb-4 opacity-60 text-[#2D1A22]"
                 >
                   {step}
                 </div>
@@ -272,7 +271,7 @@ export default function HomePage() {
                 >
                   <Icon className="w-6 h-6" style={{ color }} />
                 </div>
-                <h3 className="font-display font-bold text-lg text-[#2D1A22] mb-2">
+                <h3 className="font-display  text-lg text-[#2D1A22] mb-2">
                   {title}
                 </h3>
                 <p className="text-xs text-[#2D1A22]/55 leading-relaxed font-sans">
@@ -287,10 +286,10 @@ export default function HomePage() {
       {/* ── Trust Pillars ── */}
       <section className="space-y-8">
         <div className="text-center space-y-2">
-          <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#B32F4E]">
+          <h2 className="font-display text-2xl sm:text-3xl text-[#F4F7CD]">
             Why Tela & Tulle?
           </h2>
-          <p className="text-[#2D1A22]/50 text-sm max-w-xl mx-auto">
+          <p className="text-[#FFFFFF]/50 text-sm max-w-xl mx-auto">
             Fashion that gives back — to you, to designers, and to the planet.
           </p>
         </div>
@@ -311,7 +310,7 @@ export default function HomePage() {
                 <Icon className="w-5 h-5" style={{ color }} />
               </div>
               <div className="space-y-1">
-                <h3 className="font-display font-bold text-[#2D1A22] text-base">
+                <h3 className="font-display text-[#2D1A22] text-base">
                   {title}
                 </h3>
                 <p className="text-xs text-[#2D1A22]/55 leading-relaxed">
@@ -332,7 +331,7 @@ export default function HomePage() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/20 text-xs text-white font-semibold uppercase tracking-widest">
             <Sparkles className="w-3.5 h-3.5" /> Ready to Rent?
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white">
+          <h2 className="font-display text-3xl sm:text-4xl  text-white">
             Your Next Statement Look Awaits
           </h2>
           <p className="text-white/65 text-sm leading-relaxed">
@@ -342,7 +341,7 @@ export default function HomePage() {
           <div className="flex flex-wrap gap-4 justify-center pt-2">
             <Link
               href="/catalog"
-              className="inline-flex items-center gap-2 bg-white text-[#B32F4E] hover:bg-[#FFEEEE] px-8 py-3.5 rounded-2xl font-bold text-sm transition-all shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+              className="inline-flex items-center gap-2 bg-white text-[#B32F4E] hover:bg-[#FFEEEE] px-8 py-3.5 rounded-2xl  text-sm transition-all shadow-lg hover:-translate-y-0.5 active:translate-y-0"
             >
               <ShoppingBag className="w-4 h-4" />
               Explore Catalog

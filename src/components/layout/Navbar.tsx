@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import LogoImage from "@/public/logo-dark.png";
+import LogoImage from "@/public/logo-dark-var2.png";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAppStore } from "@/lib/store";
@@ -15,6 +15,7 @@ import {
   HeartHandshake,
   User,
   LogOut,
+  Crown,
 } from "lucide-react";
 
 export function Navbar() {
@@ -24,9 +25,16 @@ export function Navbar() {
   const navLinks = [
     { href: "/home", label: "Home", icon: Home },
     { href: "/catalog", label: "Catalog", icon: ShoppingBag },
-    { href: "/fitting", label: "Fitting", icon: Crown},
+    {
+      href: "https://calendar.app.google/xs5EftF93um84CuMA",
+      label: "Fitting",
+      icon: Crown,
+      isExternal: true,
+    },
     { href: "/lend-with-us", label: "Lend With Us", icon: HeartHandshake },
-    ...(currentUser ? [{ href: "/profile", label: "Profile", icon: User }] : []),
+    ...(currentUser
+      ? [{ href: "/profile", label: "Profile", icon: User }]
+      : []),
   ];
 
   return (
@@ -59,16 +67,17 @@ export function Navbar() {
             <span className="hidden sm:inline">8 PM Cron</span>
           </button>
         </div>
-      </div> */}
+      </div>
 
       {/* Main Header Nav */}
       <div className="px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
         {/* Brand */}
         <Link href="/home" className="flex flex-col group shrink-0">
-          {/* <span className="font-display text-xl sm:text-2xl text-[#B32F4E] font-bold group-hover:text-[#8D2040] transition">
-            tela&tulle
-          </span> */}
-          <Image src={LogoImage} alt="Tela & Tulle Logo" className="w-auto h-12 aspect-auto" />
+          <Image
+            src={LogoImage}
+            alt="Tela & Tulle Logo"
+            className="w-auto h-12 aspect-auto"
+          />
           <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#8D9A2E] font-medium hidden xs:block">
             Keeping style sustainable and accessible.
           </span>
@@ -76,23 +85,49 @@ export function Navbar() {
 
         {/* Navigation Links */}
         <nav className="flex items-center gap-0.5 sm:gap-1 text-sm font-medium">
-          {navLinks.map(({ href, label, icon: Icon }) => {
+          {navLinks.map((item) => {
+            const { href, label, icon: Icon, isExternal } = item;
             const isActive =
               pathname === href ||
               (href !== "/home" && pathname.startsWith(href));
+
+            const navItemClasses = `px-2 sm:px-3 py-2 rounded-lg transition flex items-center gap-1.5 ${
+              isActive
+                ? "bg-[#B32F4E]/10 text-[#B32F4E] border border-[#B32F4E]/25"
+                : "text-[#2D1A22]/60 hover:text-[#B32F4E] hover:bg-[#FFB5BD]/20"
+            }`;
+
+            if (isExternal) {
+              return (
+                <a
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={label}
+                  className={navItemClasses}
+                >
+                  <Icon
+                    className={`w-4 h-4 shrink-0 ${
+                      isActive ? "text-[#B32F4E]" : "text-[#2D1A22]/50"
+                    }`}
+                  />
+                  <span className="hidden sm:inline">{label}</span>
+                </a>
+              );
+            }
+
             return (
               <Link
                 key={href}
                 href={href}
                 title={label}
-                className={`px-2 sm:px-3 py-2 rounded-lg transition flex items-center gap-1.5 ${
-                  isActive
-                    ? "bg-[#B32F4E]/10 text-[#B32F4E] border border-[#B32F4E]/25"
-                    : "text-[#2D1A22]/60 hover:text-[#B32F4E] hover:bg-[#FFB5BD]/20"
-                }`}
+                className={navItemClasses}
               >
                 <Icon
-                  className={`w-4 h-4 shrink-0 ${isActive ? "text-[#B32F4E]" : "text-[#2D1A22]/50"}`}
+                  className={`w-4 h-4 shrink-0 ${
+                    isActive ? "text-[#B32F4E]" : "text-[#2D1A22]/50"
+                  }`}
                 />
                 <span className="hidden sm:inline">{label}</span>
               </Link>

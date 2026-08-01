@@ -74,19 +74,54 @@ export default function ProfilePage() {
   const { currentUser, customers, rentals, inventory } = useAppStore();
   const [editMode, setEditMode] = useState(false);
 
-  // For guest / no-customer scenario — prompt to browse
-  // A real app would match by email from auth; here we show a demo guest view
-  const demoCustomer = customers[0] ?? null;
-  const activeCustomer = demoCustomer;
+  // Determine active profile info and rental history
+  // If currentUser is logged in, use their user record.
+  // Find a customer with the same email to load their rental history.
+  // Otherwise, fallback to customers[0] (or show guest view if none).
+  const loggedInUser = currentUser;
+  const matchingCustomer = loggedInUser
+    ? customers.find((c) => c.email.toLowerCase() === loggedInUser.email.toLowerCase())
+    : null;
 
-  const customerRentals = activeCustomer
-    ? rentals
-        .filter((r) => r.customer_id === activeCustomer.id)
-        .sort(
-          (a, b) =>
-            new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
-        )
-    : [];
+  const activeProfile = loggedInUser
+    ? {
+        id: loggedInUser.id,
+        full_name: loggedInUser.full_name,
+        email: loggedInUser.email,
+        phone_number: loggedInUser.phone_number,
+        address: loggedInUser.address,
+        role: loggedInUser.role, // 'admin' | 'consignor'
+        social_handle: matchingCustomer?.social_handle ?? "",
+      }
+    : customers[0]
+    ? {
+        id: customers[0].id,
+        full_name: customers[0].full_name,
+        email: customers[0].email,
+        phone_number: customers[0].phone_number,
+        address: customers[0].shipping_address,
+        role: "customer" as const,
+        social_handle: customers[0].social_handle ?? "",
+      }
+    : null;
+
+  const customerRentals = loggedInUser
+    ? (matchingCustomer
+        ? rentals
+            .filter((r) => r.customer_id === matchingCustomer.id)
+            .sort(
+              (a, b) =>
+                new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+            )
+        : [])
+    : (customers[0]
+        ? rentals
+            .filter((r) => r.customer_id === customers[0].id)
+            .sort(
+              (a, b) =>
+                new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+            )
+        : []);
 
   const stats = {
     total: customerRentals.length,
@@ -96,7 +131,7 @@ export default function ProfilePage() {
     pending: customerRentals.filter((r) => r.status === "pending").length,
   };
 
-  if (!activeCustomer) {
+  if (!activeProfile) {
     return (
       <div className="max-w-2xl mx-auto my-12 space-y-6 text-center">
         <div className="bg-[#FFEEEE]/70 backdrop-blur-md border border-white/50 rounded-3xl p-12 shadow-glass space-y-5">
@@ -133,7 +168,7 @@ export default function ProfilePage() {
           {/* Avatar */}
           <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-[#B32F4E] to-[#8D2040] flex items-center justify-center shadow-wine-glow shrink-0">
             <span className="font-display text-3xl font-bold text-white">
-              {activeCustomer.full_name.charAt(0)}
+              {activeProfile.full_name.charAt(0)}
             </span>
           </div>
 
@@ -141,33 +176,45 @@ export default function ProfilePage() {
           <div className="flex-1 space-y-1.5">
             <div className="flex items-center gap-3 flex-wrap">
               <h1 className="font-display text-2xl sm:text-3xl font-bold text-white">
-                {activeCustomer.full_name}
+                {activeProfile.full_name}
               </h1>
-              <span className="px-2.5 py-0.5 bg-[#8D9A2E]/20 border border-[#8D9A2E]/30 text-[#A8B83A] text-[10px] font-semibold uppercase tracking-wider rounded-full">
-                Customer
-              </span>
+              {activeProfile.role === "admin" && (
+                <span className="px-2.5 py-0.5 bg-[#B32F4E]/20 border border-[#B32F4E]/30 text-[#FFB5BD] text-[10px] font-semibold uppercase tracking-wider rounded-full">
+                  Admin
+                </span>
+              )}
+              {activeProfile.role === "consignor" && (
+                <span className="px-2.5 py-0.5 bg-[#8D9A2E]/20 border border-[#8D9A2E]/30 text-[#A8B83A] text-[10px] font-semibold uppercase tracking-wider rounded-full">
+                  Consignor
+                </span>
+              )}
+              {activeProfile.role === "customer" && (
+                <span className="px-2.5 py-0.5 bg-white/10 border border-white/20 text-white/80 text-[10px] font-semibold uppercase tracking-wider rounded-full">
+                  Customer
+                </span>
+              )}
             </div>
 
             <div className="flex flex-wrap gap-4 text-white/50 text-sm">
               <span className="flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5" />
-                {activeCustomer.email}
+                {activeProfile.email}
               </span>
               <span className="flex items-center gap-1.5">
                 <Phone className="w-3.5 h-3.5" />
-                {activeCustomer.phone_number}
+                {activeProfile.phone_number}
               </span>
-              {activeCustomer.social_handle && (
+              {activeProfile.social_handle && (
                 <span className="flex items-center gap-1.5">
                   <Instagram className="w-3.5 h-3.5" />
-                  {activeCustomer.social_handle}
+                  {activeProfile.social_handle}
                 </span>
               )}
             </div>
 
             <div className="flex items-center gap-1.5 text-white/40 text-xs">
               <MapPin className="w-3.5 h-3.5 shrink-0" />
-              <span className="truncate max-w-xs">{activeCustomer.shipping_address}</span>
+              <span className="truncate max-w-xs">{activeProfile.address}</span>
             </div>
           </div>
 
@@ -190,12 +237,12 @@ export default function ProfilePage() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
-              { label: "Full Name", value: activeCustomer.full_name, icon: User },
-              { label: "Email Address", value: activeCustomer.email, icon: Mail },
-              { label: "Phone Number", value: activeCustomer.phone_number, icon: Phone },
+              { label: "Full Name", value: activeProfile.full_name, icon: User },
+              { label: "Email Address", value: activeProfile.email, icon: Mail },
+              { label: "Phone Number", value: activeProfile.phone_number, icon: Phone },
               {
                 label: "Social Handle",
-                value: activeCustomer.social_handle ?? "",
+                value: activeProfile.social_handle ?? "",
                 icon: Instagram,
               },
             ].map(({ label, value, icon: Icon }) => (
@@ -216,7 +263,7 @@ export default function ProfilePage() {
                 Shipping Address
               </label>
               <input
-                defaultValue={activeCustomer.shipping_address}
+                defaultValue={activeProfile.address}
                 className="glass-input w-full px-3 py-2.5 text-sm text-[#2D1A22] rounded-xl"
               />
             </div>

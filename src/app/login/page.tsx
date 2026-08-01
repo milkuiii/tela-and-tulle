@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Mail, Lock, User, ArrowRight, AlertCircle, Loader2, Phone, MapPin } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { createUserProfile } from "@/app/actions/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -38,21 +39,17 @@ export default function LoginPage() {
         if (signUpError) throw signUpError;
         if (!signUpData.user) throw new Error("Sign up succeeded but no user was returned.");
 
-        // 2. Insert the matching row into public.users
-        // Role defaults to 'consignor' for self-sign-ups.
-        // Admin accounts must be created by an existing admin.
-        const { error: insertError } = await supabase.from("users").insert([{
-          id: signUpData.user.id, // Use the auth user's ID as the PK
-          role: "consignor",
-          full_name: fullName,
-          email: email,
-          phone_number: phone || "N/A",
-          address: address || "N/A",
-        }]);
+        // 2. Insert the matching row into public.users using Server Action to bypass RLS
+        const res = await createUserProfile({
+          id: signUpData.user.id,
+          email,
+          fullName,
+          phone,
+          address,
+        });
 
-        if (insertError) {
-          // Clean up: if insert fails, inform the user
-          throw new Error(`Account created but profile setup failed: ${insertError.message}. Please contact support.`);
+        if (!res.success) {
+          throw new Error(`Account created but profile setup failed: ${res.error}. Please contact support.`);
         }
 
         router.push("/home");

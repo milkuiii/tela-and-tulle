@@ -8,6 +8,7 @@ import { ConsignorManager } from "@/components/admin/ConsignorManager";
 import { DressUploadForm } from "@/components/admin/DressUploadForm";
 import { PayoutSettlementView } from "@/components/admin/PayoutSettlementView";
 import { GlobalSettingsPanel } from "@/components/admin/GlobalSettingsPanel";
+import { CalendarView } from "@/components/admin/CalendarView";
 import {
   Shield,
   ShieldAlert,
@@ -21,7 +22,7 @@ import {
 export default function AdminDashboardPage() {
   const { currentUser } = useAppStore();
   const [activeTab, setActiveTab] = useState<
-    "rentals" | "consignors" | "inventory" | "payouts" | "settings"
+    "rentals" | "consignors" | "inventory" | "payouts" | "settings" | "calendar"
   >("rentals");
 
   const isAdmin = currentUser?.role === "admin";
@@ -114,6 +115,18 @@ export default function AdminDashboardPage() {
         </button>
 
         <button
+          onClick={() => setActiveTab("calendar")}
+          className={`px-4 py-2.5 rounded-xl transition flex items-center gap-2 ${
+            activeTab === "calendar"
+              ? "bg-[#B32F4E] text-white border border-[#B32F4E] shadow-wine-glow"
+              : "bg-white/60 backdrop-blur-sm text-[#2D1A22]/60 hover:text-[#B32F4E] border border-[#FFB5BD]/50 hover:border-[#B32F4E]/40"
+          }`}
+        >
+          <PlusCircle className="w-4 h-4" />
+          <span>Booking Calendar</span>
+        </button>
+
+        <button
           onClick={() => setActiveTab("payouts")}
           className={`px-4 py-2.5 rounded-xl transition flex items-center gap-2 ${
             activeTab === "payouts"
@@ -145,6 +158,7 @@ export default function AdminDashboardPage() {
         {activeTab === "inventory" && <DressUploadForm />}
         {activeTab === "payouts" && <PayoutSettlementView />}
         {activeTab === "settings" && <GlobalSettingsPanel />}
+        {activeTab === "calendar" && <CalendarView />}
       </div>
     </div>
   );

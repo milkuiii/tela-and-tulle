@@ -73,9 +73,9 @@ module.exports = {
       },
       fontFamily: {
         // Headings: Alegreya SC (Google Fonts) — elegant high-fashion serif
-        display: ['"Alegreya SC"', 'Georgia', 'serif'],
+        display: ['Times New Roman', 'serif'],
         // Body / UI: Helvetica / Alte Haas Grotesk sans-serif stack
-        sans: ['"Alte Haas Grotesk"', 'Helvetica', 'Arial', 'system-ui', 'sans-serif'],
+        sans: ['Helvetica', 'Arial', 'system-ui', 'sans-serif'],
       },
       backdropBlur: {
         xs: '2px',

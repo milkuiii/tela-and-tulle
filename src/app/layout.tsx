@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import LogoImage from "@/public/logo-dark-var2.png";
 import ".//globals.css";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/layout/Navbar";
@@ -44,10 +45,10 @@ export default function RootLayout({
             </main>
 
             {/* Footer Section */}
-            <footer className="border-t border-[#FFB5BD]/30 bg-[#FFEEEE]/40 backdrop-blur-md py-8 text-[#2D1A22]/50 text-xs text-center">
+            <footer className="border-t border-[#FFB5BD]/30 bg-[#FFEEEE]/40 backdrop-blur-md py-8 text-[#2D1A22]/50 text-xs text-center align-middle flex flex-col gap-2">
               <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <span className="font-display tracking-widest text-[#B32F4E] font-semibold text-sm">
-                  tela&tulle © 2026
+                <span className="font-display tracking-widest text-[#B32F4E] font-medium text-sm">
+                  Tela&Tulle © 2026
                 </span>
               </div>
             </footer>

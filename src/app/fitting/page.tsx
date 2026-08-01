@@ -18,7 +18,7 @@ import {
 import { format, parseISO } from "date-fns";
 
 export default function FittingPage() {
-  const { currentUser, users, setCurrentUser, inventory, rentals, payouts } =
+  const { currentUser, users, inventory, rentals, payouts } =
     useAppStore();
 
   const isConsignor = currentUser?.role === "consignor";
