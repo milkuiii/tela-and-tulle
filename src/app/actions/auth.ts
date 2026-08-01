@@ -27,15 +27,14 @@ export async function createUserProfile({ id, email, fullName, phone, address }:
   });
 
   const { data, error } = await supabaseAdmin
-    .from("users")
+    .from("customers")
     .insert([
       {
         id,
-        role: "consignor",
         full_name: fullName,
         email,
         phone_number: phone || "N/A",
-        address: address || "N/A",
+        shipping_address: address || "N/A",
       },
     ])
     .select()

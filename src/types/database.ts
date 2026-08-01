@@ -1,4 +1,4 @@
-export type UserRole = 'admin' | 'consignor';
+export type UserRole = 'admin' | 'consignor' | 'customer';
 export type InventoryStatus = 'active' | 'archived';
 export type RentalStatus = 'pending' | 'booked' | 'out' | 'returned' | 'late' | 'cancelled';
 export type PayoutStatus = 'unpaid' | 'paid';

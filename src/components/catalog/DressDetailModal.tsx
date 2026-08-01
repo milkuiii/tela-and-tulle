@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { InventoryItem, Customer } from "@/types/database";
 import { useAppStore } from "@/lib/store";
@@ -27,7 +27,7 @@ interface DressDetailModalProps {
 }
 
 export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
-  const { rentals, createCustomerAndRental } = useAppStore();
+  const { rentals, createCustomerAndRental, currentUser } = useAppStore();
 
   // Default dates: Today + 3 days to Today + 7 days
   const defaultStart = format(addDays(new Date(), 3), "yyyy-MM-dd");
@@ -47,6 +47,15 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (currentUser) {
+      setFullName(currentUser.full_name || "");
+      setEmail(currentUser.email || "");
+      setPhone(currentUser.phone_number || "");
+      setAddress(currentUser.address || "");
+    }
+  }, [currentUser]);
+
   if (!dress) return null;
 
   // Real-time availability check without turnaround buffer
@@ -65,7 +74,12 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
     e.preventDefault();
     setErrorMessage(null);
 
-    if (!fullName || !email || !phone || !address) {
+    const submitFullName = fullName || currentUser?.full_name || "";
+    const submitEmail = email || currentUser?.email || "";
+    const submitPhone = phone || currentUser?.phone_number || "";
+    const submitAddress = address || currentUser?.address || "";
+
+    if (!submitFullName || !submitEmail || !submitPhone || !submitAddress) {
       setErrorMessage("Please fill in all required customer fields.");
       return;
     }
@@ -77,10 +91,10 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
 
     const res = await createCustomerAndRental(
       {
-        full_name: fullName,
-        email,
-        phone_number: phone,
-        shipping_address: address,
+        full_name: submitFullName,
+        email: submitEmail,
+        phone_number: submitPhone,
+        shipping_address: submitAddress,
         social_handle: socialHandle || undefined,
       },
       {
@@ -208,6 +222,39 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
                 <strong>{dress.name}</strong> from {startDate} to {endDate} has
                 been created with status{" "}
                 <span className="underline font-semibold">PENDING</span>.
+              </p>
+
+              <p className="text-xs text-[#2D1A22]/60 leading-relaxed align-left text-justify">
+                To confirm your booking, kindly complete the downpayment of
+                ₱200.00 to any of the following channels. Once we receive your
+                payment, we will update your booking status to{" "}
+                <span className="underline font-semibold">CONFIRMED</span> and
+                will send you a message with further instructions.
+                <span className="italic">
+                  <br />
+                  <br /> This amount is deductible from your total rental cost
+                  and will be applied to your final invoice. The remaining
+                  balance will be due upon dress pick-up or delivery. Please
+                  note that the downpayment is non-refundable in case of
+                  cancellation.
+                </span>
+              </p>
+
+              <p className="text-s font-semibold text-[#B32F4E]">
+                {" "}
+                PAYMENT CHANNELS{" "}
+              </p>
+              <p className="text-xs text-[#2D1A22]/60 leading-relaxed align-left text-justify">
+                <strong>GCASH:</strong> 0933-826-3168 (SOPHIA LOGARTA)
+                <br />
+                <strong>GOTYME:</strong> BDO 1234-5678-9012 (Tela & Tulle)
+                <br />
+                <a
+                  href="https://docs.google.com/document/d/1hds1VRw5NaqC-6Endtfituz7vMItX62eSQh6CVbmH-c/edit?usp=sharing"
+                  className="text-[#B32F4E] hover:underline"
+                >
+                  CLICK HERE TO VIEW QR CODES
+                </a>
               </p>
               <div className="bg-white/60 p-3 rounded-xl text-left text-xs space-y-1 border border-[#FFB5BD]/40">
                 <div>
@@ -348,8 +395,10 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
                         placeholder="e.g. Isabella Reed"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        className="w-full glass-input rounded-xl pl-9 pr-3 py-2 text-[#2D1A22]"
+                        className="w-full glass-input rounded-xl pl-9 pr-3 py-2 text-[#2D1A22] disabled:opacity-50 disabled:cursor-not-allowed"
                         required
+                        readOnly={!!currentUser}
+                        disabled={!!currentUser}
                       />
                     </div>
                   </div>
@@ -365,8 +414,10 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
                         placeholder="isabella@example.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full glass-input rounded-xl pl-9 pr-3 py-2 text-[#2D1A22]"
+                        className="w-full glass-input rounded-xl pl-9 pr-3 py-2 text-[#2D1A22] disabled:opacity-50 disabled:cursor-not-allowed"
                         required
+                        readOnly={!!currentUser}
+                        disabled={!!currentUser}
                       />
                     </div>
                   </div>
@@ -382,8 +433,10 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
                         placeholder="+1 (555) 000-0000"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="w-full glass-input rounded-xl pl-9 pr-3 py-2 text-[#2D1A22]"
+                        className="w-full glass-input rounded-xl pl-9 pr-3 py-2 text-[#2D1A22] disabled:opacity-50 disabled:cursor-not-allowed"
                         required
+                        readOnly={!!currentUser}
+                        disabled={!!currentUser}
                       />
                     </div>
                   </div>
@@ -416,8 +469,10 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
                       placeholder="12 Park Ave, Suite 40, New York, NY 10016"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
-                      className="w-full glass-input rounded-xl pl-9 pr-3 py-2 text-xs text-[#2D1A22]"
+                      className="w-full glass-input rounded-xl pl-9 pr-3 py-2 text-xs text-[#2D1A22] disabled:opacity-50 disabled:cursor-not-allowed"
                       required
+                      readOnly={!!currentUser}
+                      disabled={!!currentUser}
                     />
                   </div>
                 </div>

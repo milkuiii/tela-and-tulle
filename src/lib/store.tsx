@@ -93,13 +93,33 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       if (session?.user) {
         // Fetch all data (including newly inserted users rows)
         await fetchData();
-        // Look up the profile by auth user ID
-        const { data } = await supabase
+        let { data: userData } = await supabase
           .from('users')
           .select('*')
           .eq('id', session.user.id)
           .single();
-        if (mounted && data) setCurrentUser(data);
+          
+        let profile = userData;
+        if (!profile) {
+          const { data: customerData } = await supabase
+            .from('customers')
+            .select('*')
+            .eq('id', session.user.id)
+            .single();
+          if (customerData) {
+            profile = {
+              id: customerData.id,
+              role: 'customer',
+              full_name: customerData.full_name,
+              email: customerData.email,
+              phone_number: customerData.phone_number,
+              address: customerData.shipping_address,
+              created_at: customerData.created_at,
+            };
+          }
+        }
+        
+        if (mounted && profile) setCurrentUser(profile as User);
       } else {
         await fetchData();
       }
@@ -113,12 +133,33 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       if (session?.user) {
         // Re-fetch all data so any newly created public.users rows are included
         await fetchData();
-        const { data } = await supabase
+        let { data: userData } = await supabase
           .from('users')
           .select('*')
           .eq('id', session.user.id)
           .single();
-        if (mounted && data) setCurrentUser(data);
+          
+        let profile = userData;
+        if (!profile) {
+          const { data: customerData } = await supabase
+            .from('customers')
+            .select('*')
+            .eq('id', session.user.id)
+            .single();
+          if (customerData) {
+            profile = {
+              id: customerData.id,
+              role: 'customer',
+              full_name: customerData.full_name,
+              email: customerData.email,
+              phone_number: customerData.phone_number,
+              address: customerData.shipping_address,
+              created_at: customerData.created_at,
+            };
+          }
+        }
+        
+        if (mounted && profile) setCurrentUser(profile as User);
         else if (mounted) setCurrentUser(null); // auth'd but no profile row yet
       } else {
         if (mounted) {

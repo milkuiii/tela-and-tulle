@@ -33,6 +33,12 @@ CREATE POLICY "Public guest insert customers" ON customers
 CREATE POLICY "Admins full access to customers" ON customers
   FOR ALL USING (is_admin());
 
+CREATE POLICY "Customers view own profile" ON customers
+  FOR SELECT USING (id = auth.uid());
+
+CREATE POLICY "Customers update own profile" ON customers
+  FOR UPDATE USING (id = auth.uid());
+
 -- 3. global_settings Table Policies
 CREATE POLICY "Public read global settings" ON global_settings
   FOR SELECT USING (true);

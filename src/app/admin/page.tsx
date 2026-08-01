@@ -33,7 +33,7 @@ export default function AdminDashboardPage() {
         <div className="w-16 h-16 bg-amber-50 border border-amber-300/60 rounded-full flex items-center justify-center mx-auto text-amber-500">
           <ShieldAlert className="w-8 h-8" />
         </div>
-        <h2 className="font-display text-2xl font-bold text-[#B32F4E]">
+        <h2 className="font-display text-2xl  text-[#B32F4E]">
           Admin Portal Restricted
         </h2>
         <p className="text-xs text-[#2D1A22]/50 leading-relaxed max-w-md mx-auto">
@@ -63,7 +63,7 @@ export default function AdminDashboardPage() {
               <Shield className="w-3.5 h-3.5" /> Protected Operations Portal
             </div>
 
-            <h1 className="font-display text-3xl sm:text-4xl font-bold text-[#B32F4E]">
+            <h1 className="font-display text-3xl sm:text-4xl  text-[#B32F4E]">
               Admin Control Center & Operations
             </h1>
 
