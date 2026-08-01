@@ -102,11 +102,11 @@ const HOW_IT_WORKS = [
 const FAQS = [
   {
     q: "Who can apply to be a consignor?",
-    a: "Any individual or brand with designer, couture, or high-quality eveningwear pieces can apply. We curate carefully to ensure catalog quality.",
+    a: "Any and every one can apply! After application, we undergo a thorough screening process to ensure your pieces are fit for our studio.",
   },
   {
     q: "How is my commission calculated?",
-    a: "You receive 50% of the base rental rate plus any extension fees. Security deposits are excluded from commission — they exist solely to protect your gown.",
+    a: "You receive 50% of the base rental rate plus any extension fees. Security deposits are excluded from commission — they exist solely to protect your piece.",
   },
   {
     q: "Can I set my own rental price?",
@@ -117,12 +117,12 @@ const FAQS = [
     a: "Customer security deposits cover potential damages. Our admin team manages claims, and any retained amount is documented transparently on your dashboard.",
   },
   {
-    q: "Can I withdraw my gown from the catalog?",
+    q: "Can I withdraw my piece from the catalog?",
     a: "Yes. Contact our admin team and we'll archive your listing. Any active or upcoming rentals will be honored before withdrawal.",
   },
   {
     q: "How long does the application process take?",
-    a: "Typically 3–5 business days. Once approved, we'll schedule a gown drop-off and have you live in the catalog within a week.",
+    a: "Typically 3–5 business days. Once approved, we'll schedule a drop-off and have you live in the catalog within a week.",
   },
 ];
 
@@ -288,7 +288,7 @@ export default function LendWithUsPage() {
           days.
         </p>
         <br></br>
-        <a className="inline-flex items-center gap-2 bg-white text-[#8D9A2E] hover:bg-[#F4F7CD] px-8 py-3.5 rounded-2xl  text-sm transition-all shadow-lg hover:-translate-y-0.5" href="https://forms.gle/XerNPLngkvTEtZ4v7" style={{ display: 'inline-block', textDecoration: 'none' }}>
+        <a className="inline-flex items-center gap-2 bg-white text-[#8D9A2E] hover:bg-[#F4F7CD] px-8 py-3.5 rounded-2xl  text-sm transition-all shadow-lg hover:-translate-y-0.5" href="https://forms.gle/3CGMdtTgMkprk6rLA" style={{ display: 'inline-block', textDecoration: 'none' }}>
           APPLY NOW
         </a>
       </div>
@@ -348,7 +348,7 @@ export default function LendWithUsPage() {
             into a meaningful income stream.
           </p>
           <a
-            href="#apply"
+            href="https://forms.gle/3CGMdtTgMkprk6rLA"
             className="inline-flex items-center gap-2 bg-white text-[#8D9A2E] hover:bg-[#F4F7CD] px-8 py-3.5 rounded-2xl  text-sm transition-all shadow-lg hover:-translate-y-0.5"
           >
             <HeartHandshake className="w-4 h-4" />

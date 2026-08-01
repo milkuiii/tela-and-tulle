@@ -138,7 +138,7 @@ export default function ProfilePage() {
           <div className="w-20 h-20 bg-[#B32F4E]/10 border border-[#B32F4E]/20 rounded-full flex items-center justify-center mx-auto">
             <User className="w-9 h-9 text-[#B32F4E]" />
           </div>
-          <h1 className="font-display text-2xl font-bold text-[#B32F4E]">
+          <h1 className="font-display text-2xl  text-[#B32F4E]">
             Your Profile
           </h1>
           <p className="text-sm text-[#2D1A22]/50 leading-relaxed max-w-md mx-auto">
@@ -167,7 +167,7 @@ export default function ProfilePage() {
         <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
           {/* Avatar */}
           <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-[#B32F4E] to-[#8D2040] flex items-center justify-center shadow-wine-glow shrink-0">
-            <span className="font-display text-3xl font-bold text-white">
+            <span className="font-display text-3xl  text-white">
               {activeProfile.full_name.charAt(0)}
             </span>
           </div>
@@ -175,7 +175,7 @@ export default function ProfilePage() {
           {/* Info */}
           <div className="flex-1 space-y-1.5">
             <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="font-display text-2xl sm:text-3xl font-bold text-white">
+              <h1 className="font-display text-2xl sm:text-3xl  text-white">
                 {activeProfile.full_name}
               </h1>
               {activeProfile.role === "admin" && (
@@ -232,7 +232,7 @@ export default function ProfilePage() {
       {/* ── Edit Mode placeholder (UI only) ── */}
       {editMode && (
         <div className="bg-[#F4F7CD]/70 backdrop-blur-md border border-[#8D9A2E]/20 rounded-2xl p-6 shadow-glass space-y-4">
-          <h2 className="font-display text-lg font-bold text-[#8D9A2E]">
+          <h2 className="font-display text-lg  text-[#8D9A2E]">
             Edit Profile Information
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -301,7 +301,7 @@ export default function ProfilePage() {
               <Icon className="w-5 h-5" style={{ color }} />
             </div>
             <div>
-              <div className="text-2xl font-sans font-bold text-[#2D1A22]">
+              <div className="text-2xl font-sans  text-[#2D1A22]">
                 {value}
               </div>
               <div className="text-[10px] uppercase tracking-wider text-[#2D1A22]/50 font-semibold">
@@ -314,7 +314,7 @@ export default function ProfilePage() {
 
       {/* ── Rental History Table ── */}
       <section className="bg-[#FFEEEE]/70 backdrop-blur-md border border-white/50 rounded-2xl p-6 shadow-glass space-y-5">
-        <h2 className="font-display text-xl font-bold text-[#B32F4E] border-b border-[#FFB5BD]/40 pb-3">
+        <h2 className="font-display text-xl  text-[#B32F4E] border-b border-[#FFB5BD]/40 pb-3">
           Rental History
         </h2>
 
@@ -356,7 +356,7 @@ export default function ProfilePage() {
                       className="hover:bg-[#FFB5BD]/10 transition"
                     >
                       <td className="py-3.5 px-4 font-medium text-[#2D1A22] space-y-0.5">
-                        <div className="font-display font-bold text-sm text-[#B32F4E]">
+                        <div className="font-display  text-sm text-[#B32F4E]">
                           {gown?.name ?? "Gown"}
                         </div>
                         <div className="text-[10px] text-[#2D1A22]/35 font-mono">
