@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
+import { createConsignorAccount } from '@/app/actions/auth';
 import {
   User,
   Customer,
@@ -36,7 +37,7 @@ interface AppContextType {
   updateRentalPayment: (rentalId: string, amountPaid: number, depositPaid: number, amountRetained: number) => Promise<void>;
   addInventoryItem: (item: Omit<InventoryItem, 'id' | 'created_at'>) => Promise<void>;
   updateInventoryStatus: (itemId: string, status: 'active' | 'archived') => Promise<void>;
-  createConsignorUser: (userData: Omit<User, 'id' | 'created_at' | 'role'>) => Promise<void>;
+  createConsignorUser: (userData: Omit<User, 'id' | 'created_at' | 'role'> & { password: string }) => Promise<{ success: boolean; error?: string }>;
   updateGlobalCommissionRate: (newRate: number) => Promise<void>;
   updatePayoutStatus: (payoutId: string, status: PayoutStatus) => Promise<void>;
   triggerLateCheckCron: () => Promise<void>;
@@ -260,9 +261,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     if (!error) await fetchData();
   };
 
-  const createConsignorUser = async (userData: Omit<User, 'id' | 'created_at' | 'role'>) => {
-    const { error } = await supabase.from('users').insert([{ ...userData, role: 'consignor' }]);
-    if (!error) await fetchData();
+  const createConsignorUser = async (
+    userData: Omit<User, 'id' | 'created_at' | 'role'> & { password: string }
+  ): Promise<{ success: boolean; error?: string }> => {
+    const { password, ...profile } = userData;
+    const result = await createConsignorAccount({
+      email: profile.email,
+      password,
+      fullName: profile.full_name,
+      phone: profile.phone_number,
+      address: profile.address,
+    });
+    if (result.success) await fetchData();
+    return result;
   };
 
   const updateGlobalCommissionRate = async (newRate: number) => {

@@ -73,7 +73,9 @@ export function Navbar() {
                     isActive ? "text-[#B32F4E]" : "text-[#2D1A22]/50"
                   }`}
                 />
-                <span className={isMobile ? "inline" : "hidden lg:inline"}>{label}</span>
+                <span className={isMobile ? "inline" : "hidden lg:inline"}>
+                  {label}
+                </span>
               </a>
             );
           }
@@ -91,7 +93,9 @@ export function Navbar() {
                   isActive ? "text-[#B32F4E]" : "text-[#2D1A22]/50"
                 }`}
               />
-              <span className={isMobile ? "inline" : "hidden lg:inline"}>{label}</span>
+              <span className={isMobile ? "inline" : "hidden lg:inline"}>
+                {label}
+              </span>
             </Link>
           );
         })}
@@ -108,7 +112,9 @@ export function Navbar() {
             }`}
           >
             <Shield className="w-4 h-4 text-[#8D9A2E] shrink-0" />
-            <span className={isMobile ? "inline" : "hidden lg:inline"}>Admin Portal</span>
+            <span className={isMobile ? "inline" : "hidden lg:inline"}>
+              Admin Portal
+            </span>
             <span className="w-2 h-2 rounded-full bg-[#8D9A2E] animate-pulse"></span>
           </Link>
         )}
@@ -125,7 +131,9 @@ export function Navbar() {
             }`}
           >
             <UserCheck className="w-4 h-4 text-[#8D9A2E] shrink-0" />
-            <span className={isMobile ? "inline" : "hidden lg:inline"}>Consignor Portal</span>
+            <span className={isMobile ? "inline" : "hidden lg:inline"}>
+              Consignor Portal
+            </span>
             <span className="w-2 h-2 rounded-full bg-[#8D9A2E] animate-pulse"></span>
           </Link>
         )}
@@ -138,7 +146,9 @@ export function Navbar() {
             className={`px-3 lg:px-4 py-2 mt-2 md:mt-0 md:ml-1 rounded-lg transition flex items-center justify-center gap-2 font-semibold bg-[#B32F4E] text-white hover:bg-[#8D2040] shadow-sm shadow-[#B32F4E]/20 hover:-translate-y-0.5 active:translate-y-0`}
           >
             <User className="w-4 h-4 shrink-0 text-white" />
-            <span className={isMobile ? "inline" : "hidden lg:inline"}>Login / Sign Up</span>
+            <span className={isMobile ? "inline" : "hidden lg:inline"}>
+              Login / Sign Up
+            </span>
           </Link>
         ) : (
           <button
@@ -150,7 +160,9 @@ export function Navbar() {
             className={`px-3 lg:px-4 py-2 mt-2 md:mt-0 md:ml-1 rounded-lg transition flex items-center justify-center gap-2 font-semibold bg-white border border-[#FFB5BD] text-[#B32F4E] hover:bg-[#FFEEEE] shadow-sm hover:-translate-y-0.5 active:translate-y-0 w-full md:w-auto`}
           >
             <LogOut className="w-4 h-4 shrink-0 text-[#B32F4E]" />
-            <span className={isMobile ? "inline" : "hidden lg:inline"}>Logout</span>
+            <span className={isMobile ? "inline" : "hidden lg:inline"}>
+              Logout
+            </span>
           </button>
         )}
       </>
@@ -193,10 +205,18 @@ export function Navbar() {
           </div>
         </div> */}
 
+        {/* 
+        TODO: Implement a hamburger menu for mobile view that includes the same links as the desktop navigation. The mobile menu should slide down from the top and cover the content below it, with a semi-transparent background. It should also include a close button to hide the menu when not needed.
+         */}
+
         {/* Main Header Nav */}
         <div className="px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
           {/* Brand */}
-          <Link href="/home" className="flex flex-col group shrink-0" onClick={closeMenu}>
+          <Link
+            href="/home"
+            className="flex flex-col group shrink-0"
+            onClick={closeMenu}
+          >
             <Image
               src={LogoImage}
               alt="Tela & Tulle Logo"
@@ -218,7 +238,11 @@ export function Navbar() {
             className="md:hidden p-2 text-[#B32F4E] hover:bg-[#FFB5BD]/20 rounded-lg transition"
             aria-label="Toggle Menu"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
       </div>

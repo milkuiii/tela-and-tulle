@@ -9,7 +9,23 @@ import {
   Phone,
   MapPin,
   CheckCircle2,
+  KeyRound,
+  Copy,
+  X,
 } from "lucide-react";
+
+/** Generate a random 12-character alphanumeric + symbol password. */
+function generatePassword(): string {
+  const chars =
+    "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$%&";
+  let pwd = "";
+  const arr = new Uint8Array(12);
+  crypto.getRandomValues(arr);
+  for (const byte of arr) {
+    pwd += chars[byte % chars.length];
+  }
+  return pwd;
+}
 
 export function ConsignorManager() {
   const { users, createConsignorUser } = useAppStore();
@@ -19,27 +35,49 @@ export function ConsignorManager() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
-  const [successMsg, setSuccessMsg] = useState(false);
+  const [credentials, setCredentials] = useState<{ email: string; password: string } | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [copied, setCopied] = useState<"email" | "password" | null>(null);
 
   const consignors = users.filter((u) => u.role === "consignor");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleCopy = async (text: string, field: "email" | "password") => {
+    await navigator.clipboard.writeText(text);
+    setCopied(field);
+    setTimeout(() => setCopied(null), 2000);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !email || !phone || !address) return;
 
-    createConsignorUser({
+    setLoading(true);
+    setError(null);
+    setCredentials(null);
+
+    const password = generatePassword();
+
+    const result = await createConsignorUser({
       full_name: fullName,
       email,
       phone_number: phone,
       address,
+      password,
     });
 
+    setLoading(false);
+
+    if (!result.success) {
+      setError(result.error ?? "Failed to create consignor account.");
+      return;
+    }
+
+    setCredentials({ email, password });
     setFullName("");
     setEmail("");
     setPhone("");
     setAddress("");
-    setSuccessMsg(true);
-    setTimeout(() => setSuccessMsg(false), 4000);
   };
 
   return (
@@ -56,10 +94,76 @@ export function ConsignorManager() {
           access to their isolated inventory ledger and monthly payout reports.
         </p>
 
-        {successMsg && (
-          <div className="bg-[#8D9A2E]/10 border border-[#8D9A2E]/40 text-[#6D7A1E] p-3 rounded-xl text-xs flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-[#8D9A2E]" />
-            <span>Consignor user created successfully!</span>
+        {/* Error banner */}
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 p-3 rounded-xl text-xs flex items-start gap-2">
+            <X className="w-4 h-4 mt-0.5 shrink-0 text-red-500" />
+            <span>{error}</span>
+          </div>
+        )}
+
+        {/* Credentials reveal panel */}
+        {credentials && (
+          <div className="bg-[#2D1A22] border border-[#B32F4E]/40 rounded-xl p-4 space-y-3 text-white shadow-lg animate-fade-in">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-[#FFB5BD] font-semibold text-xs">
+                <CheckCircle2 className="w-4 h-4 text-[#8D9A2E]" />
+                Account Created — Share These Credentials
+              </div>
+              <button
+                onClick={() => setCredentials(null)}
+                className="text-white/40 hover:text-white/80 transition"
+                aria-label="Dismiss credentials"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="space-y-2">
+              {/* Email row */}
+              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 flex items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5 text-[10px] text-white/40 mb-0.5 uppercase tracking-wider">
+                    <Mail className="w-3 h-3" /> Email
+                  </div>
+                  <span className="text-xs font-mono text-white truncate block">{credentials.email}</span>
+                </div>
+                <button
+                  onClick={() => handleCopy(credentials.email, "email")}
+                  className="shrink-0 text-white/40 hover:text-[#FFB5BD] transition"
+                  title="Copy email"
+                >
+                  <Copy className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Password row */}
+              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 flex items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5 text-[10px] text-white/40 mb-0.5 uppercase tracking-wider">
+                    <KeyRound className="w-3 h-3" /> Temporary Password
+                  </div>
+                  <span className="text-xs font-mono text-[#FFD6DC] tracking-widest">{credentials.password}</span>
+                </div>
+                <button
+                  onClick={() => handleCopy(credentials.password, "password")}
+                  className="shrink-0 text-white/40 hover:text-[#FFB5BD] transition"
+                  title="Copy password"
+                >
+                  <Copy className="w-4 h-4" />
+                </button>
+              </div>
+
+              {copied && (
+                <p className="text-[10px] text-[#8D9A2E] text-center animate-fade-in">
+                  ✓ Copied {copied} to clipboard
+                </p>
+              )}
+            </div>
+
+            <p className="text-[10px] text-white/30 leading-relaxed">
+              ⚠ This password will not be shown again. Share it securely with the consignor and ask them to change it on first login.
+            </p>
           </div>
         )}
 
@@ -122,9 +226,17 @@ export function ConsignorManager() {
 
           <button
             type="submit"
-            className="w-full bg-[#B32F4E] hover:bg-[#8D2040] text-white font-semibold py-3 rounded-xl transition shadow-wine-glow mt-2"
+            disabled={loading}
+            className="w-full bg-[#B32F4E] hover:bg-[#8D2040] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition shadow-wine-glow mt-2 flex items-center justify-center gap-2"
           >
-            Create Consignor Account
+            {loading ? (
+              <>
+                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Creating…
+              </>
+            ) : (
+              "Create Consignor Account"
+            )}
           </button>
         </form>
       </div>
@@ -175,3 +287,4 @@ export function ConsignorManager() {
     </div>
   );
 }
+
