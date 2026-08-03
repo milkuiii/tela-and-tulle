@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useAppStore } from "@/lib/store";
 import { FilterOptions, InventoryItem } from "@/types/database";
 import { FilterSidebar } from "@/components/catalog/FilterSidebar";
@@ -23,6 +23,7 @@ export default function CatalogPage() {
     null,
   );
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [filters, setFilters] = useState<FilterOptions>({
     searchQuery: "",
@@ -38,6 +39,10 @@ export default function CatalogPage() {
     lengthMin: undefined,
     lengthMax: undefined,
   });
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters]);
 
   // Extract metadata lists for filters
   const allTags = useMemo(() => {
@@ -115,6 +120,13 @@ export default function CatalogPage() {
     });
   }, [inventory, filters, rentals]);
 
+  const ITEMS_PER_PAGE = 12;
+  const totalPages = Math.ceil(publicInventory.length / ITEMS_PER_PAGE);
+  const paginatedInventory = publicInventory.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   return (
     <div className="space-y-8 pb-16">
       {/* Hero Header Banner */}
@@ -154,8 +166,10 @@ export default function CatalogPage() {
         </div>
       </section>
 
+      {/* TODO: Apply pagination to the layout */}
+
       {/* Main Catalog Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-6">
         {/* Mobile Filter Toggle */}
         <div className="lg:hidden col-span-1">
           <button
@@ -196,7 +210,7 @@ export default function CatalogPage() {
         </div>
 
         {/* Dress Cards Grid */}
-        <div className="col-span-1 lg:col-span-3 space-y-6">
+        <div className="col-span-1 lg:col-span-5 space-y-6">
           <div className="flex items-center justify-between border-b border-[#FFB5BD]/40 pb-4">
             <div className="text-xs text-white/70">
               Showing{" "}
@@ -240,14 +254,40 @@ export default function CatalogPage() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-6">
-              {publicInventory.map((dress) => (
-                <DressCard
-                  key={dress.id}
-                  dress={dress}
-                  onSelect={setSelectedDress}
-                />
-              ))}
+            <div className="space-y-8">
+              <div className="max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-y-visible pr-1 sm:pr-0 -mr-1 sm:mr-0 custom-scrollbar">
+                <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
+                  {paginatedInventory.map((dress) => (
+                    <DressCard
+                      key={dress.id}
+                      dress={dress}
+                      onSelect={setSelectedDress}
+                    />
+                  ))}
+                </div>
+              </div>
+              
+              {totalPages > 1 && (
+                <div className="flex justify-center items-center space-x-4 pt-4">
+                  <button
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    className="px-4 py-2 bg-[#FFEEEE]/80 disabled:opacity-50 border border-[#FFB5BD]/50 rounded-xl text-[#B32F4E] text-sm font-semibold shadow-soft hover:shadow-rose-glow transition"
+                  >
+                    Previous
+                  </button>
+                  <span className="text-sm text-[#2D1A22]/70 font-medium">
+                    Page {currentPage} of {totalPages}
+                  </span>
+                  <button
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                    className="px-4 py-2 bg-[#FFEEEE]/80 disabled:opacity-50 border border-[#FFB5BD]/50 rounded-xl text-[#B32F4E] text-sm font-semibold shadow-soft hover:shadow-rose-glow transition"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </div>
