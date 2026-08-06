@@ -35,7 +35,7 @@ export default function RootLayout({
           {/* Main Floating Glassmorphic Container */}
           <div className="w-4/5 mx-auto outer-glass-container flex flex-col overflow-hidden">
             {/* Header / Navbar Section */}
-            <div className="flex justify-center w-full p-2 sm:p-4 lg:p-6 overflow-hidden border-transparent">
+            <div className="flex justify-center w-full p-2 sm:p-4 lg:p-6 border-transparent z-50">
               <Navbar />
             </div>
 

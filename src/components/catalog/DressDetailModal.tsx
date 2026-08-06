@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { InventoryItem, Customer } from "@/types/database";
 import { useAppStore } from "@/lib/store";
@@ -47,6 +48,24 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const [showMeasurements, setShowMeasurements] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    if (window.innerWidth < 768) {
+      if (e.currentTarget.scrollTop > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    }
+  };
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     if (currentUser) {
       setFullName(currentUser.full_name || "");
@@ -56,7 +75,7 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
     }
   }, [currentUser]);
 
-  if (!dress) return null;
+  if (!dress || !mounted) return null;
 
   // Real-time availability check without turnaround buffer
   const availability = checkDressAvailability(
@@ -113,7 +132,9 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
     }
   };
 
-  return (
+
+
+  return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#2D1A22]/50 backdrop-blur-md overflow-y-auto">
       <div className="relative w-full max-w-5xl bg-[#FFEEEE]/95 backdrop-blur-lg border border-white/55 rounded-3xl overflow-hidden shadow-2xl shadow-[#B32F4E]/10 text-[#2D1A22] my-8 max-h-[90vh] flex flex-col md:flex-row">
         {/* Close Button */}
@@ -128,7 +149,13 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
         <div className="w-full md:w-1/2 bg-[#F4F7CD]/70 p-6 flex flex-col justify-between border-b md:border-b-0 md:border-r border-[#FFB5BD]/40">
           <div className="space-y-4">
             {/* Main Featured Image */}
-            <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border border-white/50 shadow-soft">
+            <div
+              className={`relative w-full rounded-2xl overflow-hidden shadow-soft transition-all duration-500 ease-in-out ${
+                isScrolled
+                  ? "h-0 opacity-0 border-none mb-0"
+                  : "aspect-[3/4] opacity-100 border border-white/50"
+              }`}
+            >
               <Image
                 src={dress.image_urls[activeImgIndex] || dress.image_urls[0]}
                 alt={dress.name}
@@ -139,7 +166,11 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
 
             {/* Thumbnail Row */}
             {dress.image_urls.length > 1 && (
-              <div className="flex gap-2 overflow-x-auto pb-1">
+              <div
+                className={`flex gap-2 overflow-x-auto transition-all duration-500 ease-in-out ${
+                  isScrolled ? "h-0 opacity-0 mb-0 hidden" : "pb-1 opacity-100"
+                }`}
+              >
                 {dress.image_urls.map((url, idx) => (
                   <button
                     key={idx}
@@ -158,11 +189,24 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
 
             {/* Exact Physical Measurements Card */}
             <div className="bg-white/60 backdrop-blur-sm border border-[#FFB5BD]/40 rounded-2xl p-4 space-y-2 text-xs">
-              <h4 className="font-display font-semibold text-[#B32F4E] uppercase tracking-wider flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" /> Physical Measurements & Fit
-                Specs
-              </h4>
-              <div className="grid grid-cols-2 gap-3 text-[#2D1A22]/70 pt-1">
+              <button
+                onClick={() => setShowMeasurements(!showMeasurements)}
+                className="w-full flex items-center justify-between font-display font-semibold text-[#B32F4E] uppercase tracking-wider"
+              >
+                <span className="flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5" /> Physical Measurements & Fit Specs
+                </span>
+                <ChevronRight
+                  className={`md:hidden w-4 h-4 transition-transform duration-300 ${
+                    showMeasurements ? "rotate-90" : ""
+                  }`}
+                />
+              </button>
+              <div
+                className={`${
+                  showMeasurements ? "grid" : "hidden"
+                } md:grid grid-cols-2 gap-3 text-[#2D1A22]/70 pt-1`}
+              >
                 <div className="bg-white/70 p-2 rounded-lg border border-[#FFB5BD]/30">
                   <span className="text-[#2D1A22]/40 block">Bust:</span>
                   <strong className="text-[#2D1A22] text-sm">
@@ -193,7 +237,10 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
         </div>
 
         {/* Right Column: Dynamic Price Calculator & Booking Form */}
-        <div className="w-full md:w-1/2 p-6 overflow-y-auto space-y-6">
+        <div 
+          className="w-full md:w-1/2 p-6 overflow-y-auto space-y-6"
+          onScroll={handleScroll}
+        >
           <div>
             <div className="flex items-center gap-2">
               <span className="bg-[#B32F4E]/10 text-[#B32F4E] text-xs font-semibold px-2.5 py-0.5 rounded-full border border-[#B32F4E]/25">
@@ -497,6 +544,7 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

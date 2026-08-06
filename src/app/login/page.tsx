@@ -204,12 +204,12 @@ export default function LoginPage() {
 
             {isLogin && (
               <div className="flex justify-end pt-1">
-                <button
+                {/* <button
                   type="button"
                   className="text-xs font-medium text-[#B32F4E] hover:text-[#8D2040] transition-colors"
                 >
                   Forgot password?
-                </button>
+                </button> */}
               </div>
             )}
 
