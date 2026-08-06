@@ -8,25 +8,31 @@ import { usePathname } from "next/navigation";
 import { useAppStore } from "@/lib/store";
 
 export function PromoBar() {
-    const promos = [
-        "Get 10% off when you book early! Promo automatically applied at checkout.",
-        "Post us and get P50.00 off your next rental!"
-    ];
+  const promos = [
+    "Get 10% off when you book early! Promo automatically applied at checkout.",
+    "Post us and get P50.00 off your next rental!",
+  ];
 
-    const [currentPromoIndex, setCurrentPromoIndex] = useState(0);
+  const [currentPromoIndex, setCurrentPromoIndex] = useState(0);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentPromoIndex((prevIndex) => (prevIndex + 1) % promos.length);
-        }, 4000);
-        return () => clearInterval(interval);
-    }, [promos.length]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPromoIndex((prevIndex) => (prevIndex + 1) % promos.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [promos.length]);
 
-    return (
-        <div className="fixed top-0 left-0 w-full bg-[#B32F4E] text-white text-sm font-semibold z-[60] py-2 px-4 flex justify-center items-center">
-            <p className="text-center animate-fade-in transition-opacity duration-500">
-                {promos[currentPromoIndex]}
-            </p>
-        </div>
-    );
+  return (
+    <div className="fixed top-0 left-0 w-full bg-[#B32F4E] text-white text-sm font-semibold z-[60] py-2 px-4 flex justify-center items-center">
+      <p className="text-center animate-fade-in transition-opacity duration-500">
+        {promos[currentPromoIndex]}{" "}
+        <a
+          href="https://docs.google.com/document/d/1vYt6XKOZoBmHP1bMWjmYykomiPohfbxE0BUC-DQRhMo/edit?usp=sharing"
+          className="underline hover:text-[#FFB5BD]"
+        >
+          TERMS AND CONDITIONS APPLY.
+        </a>
+      </p>
+    </div>
+  );
 }
