@@ -248,13 +248,17 @@ export function Navbar() {
       </div>
 
       {/* Mobile Navigation Menu Dropdown */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full bg-[#FFEEEE]/95 backdrop-blur-xl border border-white/50 shadow-lg rounded-3xl overflow-hidden z-50">
-          <nav className="flex flex-col p-4 gap-2 text-sm font-medium max-h-[70vh] overflow-y-auto">
-            {renderNavLinks(true)}
-          </nav>
-        </div>
-      )}
+      <div 
+        className={`md:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full bg-[#FFEEEE]/95 backdrop-blur-xl border border-white/50 shadow-lg rounded-3xl overflow-hidden z-50 transition-all duration-300 ease-in-out origin-top ${
+          isMobileMenuOpen 
+            ? "opacity-100 scale-y-100 translate-y-0 pointer-events-auto" 
+            : "opacity-0 scale-y-95 -translate-y-2 pointer-events-none"
+        }`}
+      >
+        <nav className="flex flex-col p-4 gap-2 text-sm font-medium max-h-[70vh] overflow-y-auto">
+          {renderNavLinks(true)}
+        </nav>
+      </div>
     </header>
   );
 }

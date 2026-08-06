@@ -150,10 +150,10 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
           <div className="space-y-4">
             {/* Main Featured Image */}
             <div
-              className={`relative w-full rounded-2xl overflow-hidden shadow-soft transition-all duration-500 ease-in-out ${
+              className={`relative w-full rounded-2xl overflow-hidden shadow-soft transition-all duration-500 ease-in-out origin-top ${
                 isScrolled
-                  ? "h-0 opacity-0 border-none mb-0"
-                  : "aspect-[3/4] opacity-100 border border-white/50"
+                  ? "h-0 opacity-0 border-none scale-y-95 -translate-y-2 pointer-events-none"
+                  : "aspect-[3/4] opacity-100 border border-white/50 scale-y-100 translate-y-0 pointer-events-auto"
               }`}
             >
               <Image
@@ -167,8 +167,10 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
             {/* Thumbnail Row */}
             {dress.image_urls.length > 1 && (
               <div
-                className={`flex gap-2 overflow-x-auto transition-all duration-500 ease-in-out ${
-                  isScrolled ? "h-0 opacity-0 mb-0 hidden" : "pb-1 opacity-100"
+                className={`flex gap-2 overflow-x-auto transition-all duration-500 ease-in-out origin-top ${
+                  isScrolled 
+                    ? "h-0 opacity-0 scale-y-95 -translate-y-2 pointer-events-none" 
+                    : "pb-1 opacity-100 scale-y-100 translate-y-0 pointer-events-auto"
                 }`}
               >
                 {dress.image_urls.map((url, idx) => (

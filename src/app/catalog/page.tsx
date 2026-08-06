@@ -255,7 +255,7 @@ export default function CatalogPage() {
             </div>
           ) : (
             <div className="space-y-8">
-              <div className="max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-y-visible pr-1 sm:pr-0 -mr-1 sm:mr-0 custom-scrollbar">
+              <div className="max-h-[70vh] overflow-y-auto sm:max-h-none sm:overflow-y-visible pr-1 sm:pr-0 -mr-1 sm:mr-0 custom-scrollbar md:[mask-image:none] [mask-image:linear-gradient(to_bottom,transparent_0%,white_5%,white_95%,transparent_100%)] ">
                 <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
                   {paginatedInventory.map((dress) => (
                     <DressCard
