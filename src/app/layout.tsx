@@ -3,6 +3,7 @@ import LogoImage from "@/public/logo-dark-var2.png";
 import ".//globals.css";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/layout/Navbar";
+import { PromoBar } from "@/components/layout/PromoBar";
 
 export const metadata: Metadata = {
   title: "Tela & Tulle | High-Fashion Dress Rental & Consignment Platform",
@@ -30,6 +31,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
+      <PromoBar />
       <body className="text-[#2D1A22] font-sans antialiased min-h-screen selection:bg-[#FFB5BD] selection:text-[#2D1A22] p-1.5 sm:p-4 lg:p-10 flex justify-center items-start">
         <Providers>
           {/* Main Floating Glassmorphic Container */}

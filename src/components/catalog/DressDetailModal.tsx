@@ -19,6 +19,7 @@ import {
   Phone,
   MapPin,
   Instagram,
+  Tag,
 } from "lucide-react";
 import { addDays, format } from "date-fns";
 
@@ -255,6 +256,9 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
             <h2 className="font-display text-2xl font-bold text-[#B32F4E] mt-2">
               {dress.name}
             </h2>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#2D1A22]/50">
+                  By renting from tela&tulle, you agree to the following Terms & Conditions: <a href="https://docs.google.com/document/d/1vYt6XKOZoBmHP1bMWjmYykomiPohfbxE0BUC-DQRhMo/edit?usp=sharing" className="text-[#B32F4E] hover:underline">View Terms</a>
+            </h4>
             <p className="text-xs text-[#2D1A22]/60 mt-1 leading-relaxed">
               {dress.description}
             </p>
@@ -381,9 +385,17 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
 
               {/* Price Breakdown Card */}
               <div className="bg-white/55 backdrop-blur-sm border border-[#FFB5BD]/40 rounded-2xl p-4 space-y-2 text-xs">
-                <h4 className="font-semibold text-[#2D1A22]/60 uppercase tracking-wider">
-                  Dynamic Pricing Breakdown
-                </h4>
+                <div className="flex items-center justify-between">
+                  <h4 className="font-semibold text-[#2D1A22]/60 uppercase tracking-wider">
+                    Dynamic Pricing Breakdown
+                  </h4>
+                  {priceBreakdown.isEarlyBird && (
+                    <span className="flex items-center gap-1 bg-[#8D9A2E]/15 text-[#5C6B1A] border border-[#8D9A2E]/40 text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">
+                      <Tag className="w-3 h-3" />
+                      Early Bird Promo
+                    </span>
+                  )}
+                </div>
 
                 <div className="flex justify-between text-[#2D1A22]/50 pt-1">
                   <span>Base 2-Day Rental:</span>
@@ -402,6 +414,16 @@ export function DressDetailModal({ dress, onClose }: DressDetailModalProps) {
                     <span className="font-medium">
                       +₱{priceBreakdown.extensionFee.toFixed(2)}
                     </span>
+                  </div>
+                )}
+
+                {priceBreakdown.isEarlyBird && (
+                  <div className="flex justify-between text-[#5C6B1A] font-semibold bg-[#8D9A2E]/10 border border-[#8D9A2E]/30 rounded-lg px-2 py-1.5">
+                    <span className="flex items-center gap-1">
+                      <Tag className="w-3 h-3" />
+                      Early Bird Promo (10% off):
+                    </span>
+                    <span>−₱{priceBreakdown.earlyBirdDiscount.toFixed(2)}</span>
                   </div>
                 )}
 

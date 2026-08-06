@@ -1,6 +1,11 @@
 import { InventoryItem, Rental } from '@/types/database';
 import { differenceInCalendarDays, parseISO, addDays, subDays, isWithinInterval, areIntervalsOverlapping } from 'date-fns';
 
+/** Number of days ahead a booking must be made to qualify for the Early Bird Promo */
+export const EARLY_BIRD_DAYS_THRESHOLD = 21;
+/** Discount rate applied to the rental subtotal for the Early Bird Promo */
+export const EARLY_BIRD_DISCOUNT_RATE = 0.10;
+
 export interface PriceBreakdown {
   totalDays: number;
   baseDays: number;
@@ -8,6 +13,10 @@ export interface PriceBreakdown {
   baseRentalPrice: number;
   extensionFee: number;
   rentalSubtotal: number;
+  /** Whether the Early Bird Promo (10% off) was applied */
+  isEarlyBird: boolean;
+  /** Amount saved from the Early Bird Promo (0 if not applicable) */
+  earlyBirdDiscount: number;
   securityDeposit: number;
   totalAmountDue: number;
 }
@@ -15,7 +24,8 @@ export interface PriceBreakdown {
 export function calculateRentalPrice(
   dress: InventoryItem,
   startDateStr: string,
-  endDateStr: string
+  endDateStr: string,
+  bookingDate: Date = new Date()
 ): PriceBreakdown {
   const start = parseISO(startDateStr);
   const end = parseISO(endDateStr);
@@ -30,7 +40,15 @@ export function calculateRentalPrice(
   const extensionFee = extraDays * extensionRate;
   const rentalSubtotal = baseRentalPrice + extensionFee;
   const securityDeposit = Number(dress.security_deposit);
-  const totalAmountDue = rentalSubtotal + securityDeposit;
+
+  // Early Bird Promo: 10% off rentalSubtotal when booked ≥21 days before start
+  const daysUntilRental = differenceInCalendarDays(start, bookingDate);
+  const isEarlyBird = daysUntilRental >= EARLY_BIRD_DAYS_THRESHOLD;
+  const earlyBirdDiscount = isEarlyBird
+    ? parseFloat((rentalSubtotal * EARLY_BIRD_DISCOUNT_RATE).toFixed(2))
+    : 0;
+
+  const totalAmountDue = rentalSubtotal - earlyBirdDiscount + securityDeposit;
 
   return {
     totalDays,
@@ -39,6 +57,8 @@ export function calculateRentalPrice(
     baseRentalPrice,
     extensionFee,
     rentalSubtotal,
+    isEarlyBird,
+    earlyBirdDiscount,
     securityDeposit,
     totalAmountDue,
   };
